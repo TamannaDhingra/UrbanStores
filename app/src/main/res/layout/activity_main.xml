@@ -7,25 +7,25 @@
     tools:context=".activities.MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/buisnessInfoRelative"
+        android:id="@+id/toolBar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_46sdp"
         android:elevation="@dimen/_5sdp"
         android:background="@color/appbar_bg"
         android:paddingTop="@dimen/_3sdp"
-        android:visibility="gone"
-        android:paddingBottom="@dimen/_7sdp"
+        android:visibility="visible"
+        android:paddingBottom="@dimen/_6sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivBack"
-            android:layout_width="@dimen/_35sdp"
-            android:layout_height="@dimen/_35sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/_12sdp"
-            android:src="@drawable/user"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:src="@mipmap/profile"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -36,20 +36,45 @@
             style="@style/AppTextSemBoldMed"
             android:layout_centerVertical="true"
             android:layout_toEndOf="@+id/ivBack"
-            android:text="Back"
-            android:textSize="@dimen/_12sdp"
-            android:visibility="gone"
+            android:fontFamily="@font/sofiapromedium"
+            android:text="HOME"
+            android:textSize="@dimen/_15sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/ivBack"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/bellIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:src="@mipmap/bell_3x"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <FrameLayout
         android:id="@+id/mainContainer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigationView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolBar" />
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigationView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        app:itemIconTint="@null"
+        app:menu="@menu/bottom_nav_menu"
+        android:background="@drawable/top_white_curve"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
