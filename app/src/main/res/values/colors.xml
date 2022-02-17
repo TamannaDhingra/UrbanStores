@@ -8,5 +8,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="appbar_bg">#37d176</color>
+    <color name="green_bg">#37d176</color>
+    <color name="bottom_navigation_txt_color">#D3D3D3</color>
 </resources>

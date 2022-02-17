@@ -4,24 +4,24 @@
 
     <item
         android:id="@+id/homeMenu"
-        android:title="Home"
+        android:title="HOME"
         app:showAsAction="ifRoom"
         android:icon="@mipmap/home_3x"/>
     <item
         android:id="@+id/myorderMenu"
-        android:title="My Orders"
+        android:title="MY ORDERS"
         app:showAsAction="ifRoom"
         android:icon="@mipmap/orders_3x"/>
 
     <item
         android:id="@+id/mycartMenu"
-        android:title="My Cart"
+        android:title="MY CART"
         app:showAsAction="ifRoom"
         android:icon="@mipmap/cart_3x"/>
 
     <item
         android:id="@+id/settingsMenu"
-        android:title="Settings"
+        android:title="SETTINGS"
         app:showAsAction="ifRoom"
         android:icon="@mipmap/settings"/>
 </menu>
