@@ -21,6 +21,7 @@ open class BaseActivity : AppCompatActivity() {
     var cartCallback : CartCallback ?=null
     var productsList : ArrayList<AllProductsModel> = ArrayList()
     var cartTotalAmount : Int = 0
+    var totalDiscountAmount : Int = 0
 
     fun replaceFragment(mFragment : Fragment, isBack : Boolean, allowAnim : Boolean){
         currentFragment = mFragment

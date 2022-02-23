@@ -13,8 +13,7 @@ import kotlin.properties.Delegates
 
 class FruitsCartAdapter(
     var fragment: CartFrag,
-    var productsList: List<AllProductsModel>,
-    var baseActivity: BaseActivity
+    var productsList: List<AllProductsModel>
 ) : RecyclerView.Adapter<FruitsCartAdapter.ViewHolder>() {
 
     inner class ViewHolder(val binding : CartViewBinding) : RecyclerView.ViewHolder(binding.root){
@@ -35,12 +34,15 @@ class FruitsCartAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        //Cart Pieces Increment Listener
         holder.increaseI.setOnClickListener {
             if (holder.items.text.toString().toInt()>0){
                 holder.proPcs.setText(""+(Integer.parseInt(holder.items.getText().toString()) + 1) +" Pcs")
                 holder.items.setText(""+(Integer.parseInt(holder.items.getText().toString()) + 1))
             }
         }
+
+        //Cart Pieces Decrement Listener
         holder.decreaseI.setOnClickListener {
             if (holder.items.text.toString().toInt() > 0) {
                 holder.proPcs.setText(""+(Integer.parseInt(holder.items.getText().toString()) - 1) +" Pcs")
@@ -48,6 +50,7 @@ class FruitsCartAdapter(
             }
         }
 
+        //values  Initialization
         if (productsList.get(position).isAddedToCart && productsList.get(position).productCategory.equals("Fruits")){
             holder.proName.text = productsList.get(position).productname
             holder.proPrice.text = productsList.get(position).productPrice.toString() +" Rs."
@@ -59,12 +62,18 @@ class FruitsCartAdapter(
             holder.proPcs.text = (productsList.get(position).productPcs+1).toString() + " Pcs"
         }
 
+        //Total Price Logic
         val totalFruitPrice = productsList.get(position).productPrice.toString().toInt()
         val totalFruitPcs = productsList.get(position).productPcs.toString().toInt()+1
         val finalPrice = totalFruitPrice*totalFruitPcs
 
-        baseActivity.cartTotalAmount =  baseActivity.cartTotalAmount + finalPrice
-        Log.e("thefinalAmountIs", baseActivity.cartTotalAmount.toString())
+        //Discount Value Set in final
+        fragment.getBaseActivity().totalDiscountAmount = fragment.getBaseActivity().totalDiscountAmount+productsList.get(position).discount.toInt()
+
+        //Set Total Price
+        fragment.getBaseActivity().cartTotalAmount =  fragment.getBaseActivity().cartTotalAmount + finalPrice
+        Log.e("thefinalAmountIs", fragment.getBaseActivity().cartTotalAmount.toString())
+        fragment.setTotal()
     }
 
     override fun getItemCount(): Int {

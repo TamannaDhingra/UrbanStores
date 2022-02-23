@@ -34,8 +34,6 @@ class ShopProductsFrag : BaseFragment() {
         discountsAdapterCall()
     }
 
-
-
     private fun viewPagerCode() {
 
         binding?.productsTabLayout?.addTab(binding?.productsTabLayout?.newTab()?.setText("All")!!)

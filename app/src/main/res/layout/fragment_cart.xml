@@ -125,7 +125,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:text="Rs. 130"
+                android:text="Rs. 0"
                 android:textColor="@color/green_bg"
                 android:textSize="@dimen/_13sdp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -137,13 +137,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
-                android:text="Saved Rs 20"
+                android:text="Saved Rs 0"
                 android:textColor="#F2f4f3"
                 android:textSize="@dimen/_10sdp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/totalRupee" />
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/checkoutBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_32sdp"
                 android:layout_marginTop="@dimen/_5sdp"

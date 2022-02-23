@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.cart.ConfirmPickup.OrderConfirmFrag">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/locationImg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/loaction64x64"
+            android:layout_margin="@dimen/_10sdp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/productName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/regularHeadingTxts"
+            android:text="Deliver to: Home"
+            android:layout_marginStart="@dimen/_2sdp"
+            android:textColor="@color/checkout_bg_color"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/locationImg"
+            android:layout_marginTop="@dimen/_10sdp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/default_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/regularHeadingTxts"
+            android:text="(Default)"
+            android:textSize="@dimen/_11sdp"
+            android:textColor="@color/item_count_txt_color"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="@dimen/_4sdp"
+            app:layout_constraintStart_toEndOf="@+id/productName"
+            android:layout_marginTop="@dimen/_13sdp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/changeLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/sofiaproregular"
+            android:text="@string/change"
+            android:textSize="@dimen/_11sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:textColor="@color/green_bg"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/_13sdp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/acutualAddress"
+            style="@style/regularHeadingTxts"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:fontFamily="@font/sofiapromedium"
+            android:text="202 main town, Park Avenue, Chandigarh"
+            android:textColor="@color/cart_item_txt_color"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintStart_toStartOf="@+id/locationImg"
+            app:layout_constraintTop_toBottomOf="@+id/locationImg" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/fruitsConstraint"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_30sdp"
+            android:background="#F2F2F2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="@dimen/_15sdp"
+            app:layout_constraintTop_toBottomOf="@+id/acutualAddress">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:fontFamily="@font/sofiaprosemibold"
+                android:text="Order Summary"
+                android:textColor="@color/cart_item_txt_color"
+                android:textSize="@dimen/_11sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/itemTotalTxt"
+            style="@style/regularHeadingTxts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/sofiapromedium"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:text="Item Total"
+            android:textColor="@color/cart_item_txt_color"
+            android:textSize="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_7sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fruitsConstraint" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/deliveryChargeTxt"
+            style="@style/regularHeadingTxts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/sofiapromedium"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:text="Delivery Charges"
+            android:textColor="@color/cart_item_txt_color"
+            android:textSize="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_7sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/itemTotalTxt" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/grandTotalTxt"
+            style="@style/regularHeadingTxts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/sofiapromedium"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:text="Grand Total"
+            android:textColor="@color/regular_font_color"
+            android:textSize="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_7sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/deliveryChargeTxt" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/itemtotalAmnt"
+            style="@style/regularHeadingTxts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/sofiapromedium"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:text="Rs 130"
+            android:textColor="@color/cart_item_txt_color"
+            android:textSize="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_7sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fruitsConstraint" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/deliveryChargeAmnt"
+            style="@style/regularHeadingTxts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/sofiapromedium"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:text="Rs 20"
+            android:textColor="@color/cart_item_txt_color"
+            android:textSize="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_7sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/itemtotalAmnt" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/grandTotalAmnt"
+            style="@style/regularHeadingTxts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/sofiapromedium"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:text="Rs 150"
+            android:textColor="@color/regular_font_color"
+            android:textSize="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_7sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/deliveryChargeAmnt" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/popularItemsList"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_30sdp"
+            android:background="#F2F2F2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="@dimen/_15sdp"
+            app:layout_constraintTop_toBottomOf="@+id/grandTotalTxt">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:fontFamily="@font/sofiaprosemibold"
+                android:text="Before you proceed check popular items"
+                android:textColor="@color/cart_item_txt_color"
+                android:textSize="@dimen/_11sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/popularItemsRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="@dimen/_5sdp"
+            app:layout_constraintTop_toBottomOf="@+id/popularItemsList" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/confirmOrderBtn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_46sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:backgroundTint="@color/green_bg"
+            android:fontFamily="@font/sofiaprobold"
+            android:text="PRPCEED"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12sdp"
+            app:cornerRadius="@dimen/_4sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

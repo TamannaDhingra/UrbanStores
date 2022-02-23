@@ -23,7 +23,7 @@ class ShopListsAdapter(val fragment: ShopsFragment) : RecyclerView.Adapter<ShopL
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.openProducts.setOnClickListener {
-            fragment.fragmentManager?.beginTransaction()?.replace(R.id.mainContainer,ShopProductsFrag())?.addToBackStack(null)?.commit()
+            fragment.fragmentManager?.beginTransaction()?.replace(R.id.mainContainer,ShopProductsFrag())?.commit()
         }
     }
 

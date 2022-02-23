@@ -65,7 +65,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/regularHeadingTxts"
-                    android:text="Rs 90"
+                    android:text="90"
                     android:textSize="@dimen/_13sdp"
                     android:textColor="@color/amount_txt_color"
                     app:layout_constraintTop_toBottomOf="@+id/productName"
