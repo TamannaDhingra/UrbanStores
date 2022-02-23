@@ -1,60 +1,73 @@
 package com.netSet.urbanstores.ui.cart
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.netSet.urbanstores.R
+import com.netSet.urbanstores.activities.MainActivity
+import com.netSet.urbanstores.base.BaseFragment
+import com.netSet.urbanstores.databinding.FragmentCartBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class CartFrag : BaseFragment() {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [CartFrag.newInstance] factory method to
- * create an instance of this fragment.
- */
-class CartFrag : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    var binding :FragmentCartBinding ?=null
+    var fruitsAdapter : FruitsCartAdapter ?=null
+    var vegiAdapter : VegitablesCartAdapter ?= null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        if (rootView == null){
+            binding = DataBindingUtil.inflate(inflater,R.layout.fragment_cart,container,false)
+            rootView =  binding?.root
         }
+        return rootView
+        binding?.totalRupee?.text =  getBaseActivity().cartTotalAmount.toString()
+
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_cart, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding?.totalRupee?.text =  getBaseActivity().cartTotalAmount.toString()
+        getBaseActivity().cartTotalAmount = 0
+        fruitsAdapter()
+        vegitablesAdapter()
+        navigationBgVisiblity()
+        setToolBar(R.mipmap.profile,"MY CART",R.mipmap.bell_3x)
+        (activity as MainActivity).activityMainBinding?.bottomGreenBg?.visibility = View.VISIBLE
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment CartFrag.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            CartFrag().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    private fun vegitablesAdapter() {
+
+        val vegeList = getBaseActivity().productsList.filter {
+            it.productCategory.equals("Vegetables")&&
+                    it.isAddedToCart.equals(true)
+        }
+
+        vegiAdapter = VegitablesCartAdapter(this,vegeList,getBaseActivity())
+        val layoutManager = LinearLayoutManager(context)
+        binding?.vegitablesRecyclerview?.setHasFixedSize(true)
+        binding?.vegitablesRecyclerview?.layoutManager = layoutManager
+        binding?.vegitablesRecyclerview?.adapter =vegiAdapter
+
+        binding?.vegetableCount?.text = vegeList.size.toString() +" items"
+    }
+
+    private fun fruitsAdapter() {
+
+        val fruitsList = getBaseActivity().productsList.filter {
+            it.productCategory.equals("Fruits") &&
+                    it.isAddedToCart.equals(true)
+        }
+
+        fruitsAdapter = FruitsCartAdapter(this,fruitsList,getBaseActivity())
+        val manager = LinearLayoutManager(context)
+        binding?.fruitsRecyclerview?.setHasFixedSize(true)
+        binding?.fruitsRecyclerview?.layoutManager = manager
+        binding?.fruitsRecyclerview?.adapter = fruitsAdapter
+
+        binding?.fruitsCount?.text = fruitsList.size.toString() +" items"
     }
 }

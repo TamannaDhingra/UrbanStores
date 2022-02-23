@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="card_corner_radius">@dimen/_7sdp</dimen>
+    <dimen name="card_elevation">@dimen/_2sdp</dimen>
+    <dimen name="card_max_elevation">@dimen/_12sdp</dimen>
+    <dimen name="card_view_height">@dimen/_190sdp</dimen>
+    <dimen name="card_view_margin">@dimen/_13sdp</dimen>
+    <dimen name="tv_margin">@dimen/_20sdp</dimen>
+    <dimen name="heading_text_size">@dimen/_11sdp</dimen>
+    <dimen name="details_text_size">@dimen/_12sdp</dimen>
+    <dimen name="tv_margin_top">@dimen/_2sdp</dimen>
+    <dimen name="tv_margin_end">@dimen/_20sdp</dimen>
+    <dimen name="tv_margin_start">@dimen/_20sdp</dimen>
+    <dimen name="margin_top">@dimen/_10sdp</dimen>
+</resources>

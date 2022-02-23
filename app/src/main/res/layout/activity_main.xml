@@ -6,13 +6,13 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         tools:context=".activities.MainActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/toolBar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_46sdp"
-            android:elevation="@dimen/_5sdp"
             android:background="@color/green_bg"
             android:paddingTop="@dimen/_3sdp"
             android:visibility="visible"
@@ -22,22 +22,22 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/ivBack"
-                android:layout_width="@dimen/_35sdp"
-                android:layout_height="@dimen/_35sdp"
+                android:id="@+id/profileImg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/_8sdp"
-                android:src="@mipmap/profile"
+                android:layout_marginStart="@dimen/_7sdp"
+                android:src="@mipmap/profile_3x"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:visibility="visible" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvBackText"
+                android:id="@+id/title"
                 style="@style/AppTextSemBoldMed"
                 android:layout_centerVertical="true"
-                android:layout_toEndOf="@+id/ivBack"
+                android:layout_toEndOf="@+id/profileImg"
                 android:fontFamily="@font/sofiapromedium"
                 android:text="HOME"
                 android:textSize="@dimen/_15sdp"
@@ -47,7 +47,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/bellIcon"
+                android:id="@+id/menuIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -68,6 +68,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolBar" />
 
+        <LinearLayout
+            android:id="@+id/bottom_green_bg"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_25sdp"
+            android:background="@color/checkout_bg_color"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/bottomNavigationView"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:orientation="vertical" />
+
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigationView"
             style="@style/Widget.MaterialComponents.BottomNavigationView"
@@ -75,14 +86,15 @@
             android:layout_height="@dimen/_50sdp"
             app:labelVisibilityMode="labeled"
             app:itemIconTint="@null"
-            app:itemTextColor="@color/bottom_navigation_txt_color"
+            android:elevation="@dimen/_10sdp"
+            app:itemTextColor="@color/navigation_txt_color"
             app:menu="@menu/bottom_nav_menu"
-            android:paddingTop="@dimen/_2sdp"
-            android:paddingBottom="@dimen/_1sdp"
+            android:paddingTop="@dimen/_4sdp"
             android:background="@drawable/top_white_curve"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+           />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

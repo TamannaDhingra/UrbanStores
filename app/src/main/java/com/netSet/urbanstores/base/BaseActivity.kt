@@ -9,11 +9,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.netSet.urbanstores.R
+import com.netSet.urbanstores.models.AllProductsModel
+import com.netSet.urbanstores.ui.shops.ShopProducts.CartCallback
+import com.netSet.urbanstores.ui.shops.ShopProducts.allProducts.AllproductsAdapter
 
 open class BaseActivity : AppCompatActivity() {
 
     var currentFragment : Fragment?= null
     var fragmentTransaction : FragmentTransaction?= null
+    var adapter : AllproductsAdapter?= null
+    var cartCallback : CartCallback ?=null
+    var productsList : ArrayList<AllProductsModel> = ArrayList()
+    var cartTotalAmount : Int = 0
 
     fun replaceFragment(mFragment : Fragment, isBack : Boolean, allowAnim : Boolean){
         currentFragment = mFragment
@@ -49,4 +56,13 @@ open class BaseActivity : AppCompatActivity() {
         }
         return super.dispatchTouchEvent(ev)
     }
+    fun addProducts() {
+        productsList.add(AllProductsModel(R.mipmap.img_3,"Potato",90,"50",false,"Vegetables",0))
+        productsList.add(AllProductsModel(R.mipmap.img_4,"Apple",80,"10",false,"Fruits",0))
+        productsList.add(AllProductsModel(R.mipmap.img_3,"Tomato",40,"40",false,"Vegetables",0))
+        productsList.add(AllProductsModel(R.mipmap.img_4,"Mango",80,"50",false,"Fruits",0))
+        productsList.add(AllProductsModel(R.mipmap.img_4,"Grapes",70,"70",false,"Fruits",0))
+    }
+
+
 }

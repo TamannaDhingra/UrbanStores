@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layoutDirection="ltr"
+    android:id="@android:id/text1"
+    android:text="hello"
+    android:singleLine="true"
+    android:textSize="@dimen/_10sdp"
+    android:paddingHorizontal="@dimen/_5sdp"
+    android:drawableEnd="@mipmap/arrow_36x36"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:ellipsize="marquee"
+    android:paddingLeft="2dp"
+    xmlns:android="http://schemas.android.com/apk/res/android" />

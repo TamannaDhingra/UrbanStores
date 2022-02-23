@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/itemConstraint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/openProducts"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_90sdp"
+            android:layout_marginHorizontal="@dimen/card_view_margin"
+            app:cardBackgroundColor="@color/white"
+            android:layout_marginVertical="@dimen/_8sdp"
+            app:cardCornerRadius="@dimen/card_corner_radius"
+            app:cardElevation="@dimen/card_elevation"
+            app:cardMaxElevation="@dimen/card_max_elevation"
+            app:cardPreventCornerOverlap="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/productImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_65sdp"
+                    android:src="@mipmap/img_4"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/discountTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/discount_circular_drawable"
+                    android:fontFamily="@font/sofiaprosemibold"
+                    android:text="10%\noff"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_6sdp"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_8sdp"
+                    app:layout_constraintEnd_toStartOf="@+id/productName"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/productName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    style="@style/regularHeadingTxts"
+                    android:text="Banana - Yelakki"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/productImg"
+                    android:layout_marginTop="@dimen/_10sdp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/productAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/regularHeadingTxts"
+                    android:text="Rs 90"
+                    android:textSize="@dimen/_13sdp"
+                    android:textColor="@color/amount_txt_color"
+                    app:layout_constraintTop_toBottomOf="@+id/productName"
+                    app:layout_constraintStart_toEndOf="@+id/productImg" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/mrpTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/regularHeadingTxts"
+                    app:layout_constraintStart_toEndOf="@+id/productAmount"
+                    app:layout_constraintTop_toBottomOf="@+id/productName"
+                    android:text="@string/mrp_txt"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:textSize="@dimen/_10sdp"
+                    android:textColor="@color/mrp_discount_txt_color" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/productDiscount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/regularHeadingTxts"
+                    app:layout_constraintStart_toEndOf="@+id/mrpTxt"
+                    app:layout_constraintTop_toBottomOf="@+id/productName"
+                    android:text="@string/rs_strikethrough_txt"
+                    android:background="@drawable/strikethrough"
+                    android:layout_marginStart="@dimen/_2sdp"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:textSize="@dimen/_10sdp"
+                    android:textColor="@color/mrp_discount_txt_color" />
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/quantitys"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:background="@drawable/rect_bg"
+                    android:layout_marginBottom="@dimen/_13sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/productImg" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/itemAddButton"
+                    android:layout_width="@dimen/_47sdp"
+                    android:layout_height="@dimen/_27sdp"
+                    android:text="@string/add_button"
+                    android:textSize="@dimen/_9sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_margin="@dimen/_10sdp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/itemRemoveButton"
+                    android:layout_width="@dimen/_70sdp"
+                    android:layout_height="@dimen/_27sdp"
+                    android:text="Remove"
+                    android:visibility="gone"
+                    android:textSize="@dimen/_9sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_margin="@dimen/_10sdp" />
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
