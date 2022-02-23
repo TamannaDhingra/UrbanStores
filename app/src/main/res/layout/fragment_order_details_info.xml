@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.orders.OrderDetailsInfo.FragmentOrderDetailsInfo">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/start_margin_order_details"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:fontFamily="@font/sofiaprosemibold"
+                android:text="Order ID :"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_13sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_2sdp"
+                android:fontFamily="@font/sofiaprosemibold"
+                android:text="12012901"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_13sdp"
+                app:layout_constraintStart_toEndOf="@+id/textView2"
+                app:layout_constraintTop_toTopOf="@+id/textView2" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_240sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                app:cardCornerRadius="@dimen/card_corner_radius"
+                app:cardElevation="@dimen/_5sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView3">
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_240sdp"
+
+                    app:cardCornerRadius="@dimen/card_corner_radius"
+                    app:cardElevation="@dimen/card_elevation">
+
+                    <TextView
+                        android:id="@+id/tv_items"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                       android:layout_marginLeft="@dimen/_20sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:fontFamily="@font/sofiapro_light"
+                        android:text="ORDERED ON"
+                        android:textSize="@dimen/heading_text_size"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <TextView
+                        android:id="@+id/tv_item_detalis"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/tv_margin_start"
+                        android:layout_marginTop="@dimen/tv_margin_top"
+                        android:layout_marginEnd="@dimen/tv_margin_start"
+                        android:fontFamily="@font/sofiapromedium"
+                        android:text="2 june 2020 at 7:54 PM"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/details_text_size"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_items" />
+
+
+                    <TextView
+                        android:id="@+id/tv_orderOn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/tv_margin_start"
+                        android:layout_marginTop="@dimen/margin_top"
+                        android:fontFamily="@font/sofiapro_light"
+                        android:text="TOTAL AMOUNT"
+                        android:textSize="@dimen/heading_text_size"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_item_detalis" />
+
+                    <TextView
+                        android:id="@+id/order_on_details"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/tv_margin_start"
+                        android:layout_marginTop="@dimen/tv_margin_top"
+                        android:layout_marginEnd="@dimen/tv_margin_end"
+                        android:fontFamily="@font/sofiapromedium"
+                        android:text="Rs 130"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/details_text_size"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_orderOn" />
+
+                    <TextView
+                        android:id="@+id/tv_total_amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/tv_margin_start"
+                        android:layout_marginTop="@dimen/margin_top"
+                        android:fontFamily="@font/sofiapro_light"
+                        android:text="ITEMS"
+                        android:textSize="@dimen/heading_text_size"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/order_on_details" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_item_details"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/tv_margin_start"
+                        android:layout_marginTop="@dimen/tv_margin_top"
+                        android:layout_marginEnd="@dimen/tv_margin_end"
+                        tools:listitem="@layout/inflater_items_details"
+                        android:nestedScrollingEnabled="false"
+                        tools:itemCount="4"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_total_amount" />
+
+                    <TextView
+                        android:id="@+id/tv_payment_via"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/tv_margin_start"
+                        android:layout_marginTop="@dimen/margin_top"
+                        android:fontFamily="@font/sofiapro_light"
+                        android:text="Payment VIA"
+                        android:textSize="@dimen/heading_text_size"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/rv_item_details" />
+
+
+                    <ImageView
+                        android:id="@+id/tv_payment_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_marginStart="@dimen/tv_margin_start"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:src="@mipmap/make_payment"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/details_text_size"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_payment_via" />
+
+                    <TextView
+                        android:id="@+id/tv_payment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_2sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:fontFamily="@font/sofiapromedium"
+                        android:text="**** **** **** 4471"
+                        android:textSize="@dimen/details_text_size"
+                        app:layout_constraintStart_toEndOf="@+id/tv_payment_img"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_payment_via" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

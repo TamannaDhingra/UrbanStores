@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="card_corner_radius">@dimen/_7sdp</dimen>
-    <dimen name="card_elevation">@dimen/_2sdp</dimen>
+    <dimen name="card_elevation">@dimen/_1sdp</dimen>
     <dimen name="card_max_elevation">@dimen/_12sdp</dimen>
     <dimen name="card_view_height">@dimen/_190sdp</dimen>
     <dimen name="card_view_margin">@dimen/_13sdp</dimen>
@@ -12,4 +12,7 @@
     <dimen name="tv_margin_end">@dimen/_20sdp</dimen>
     <dimen name="tv_margin_start">@dimen/_20sdp</dimen>
     <dimen name="margin_top">@dimen/_10sdp</dimen>
+    <dimen name="in_progress_padding_start">@dimen/_10sdp</dimen>
+    <dimen name="inProgress_txt_size">@dimen/_12sdp</dimen>
+    <dimen name="start_margin_order_details">@dimen/_10sdp</dimen>
 </resources>

@@ -19,4 +19,10 @@
     <color name="mrp_discount_txt_color">#A2A2A2</color>
     <color name="checkout_bg_color">#0D413B</color>
     <color name="notification_txt_color">#7F7F7F</color>
+
+    <color name="textgray">#878690</color>
+    <color name="textcolor">#5464A6</color>
+    <color name="textfieldbg">#DBDBDB</color>
+    <color name="lightgrey">#E6E6E8</color>
+    <color name="orange">#FF7C00</color>
 </resources>

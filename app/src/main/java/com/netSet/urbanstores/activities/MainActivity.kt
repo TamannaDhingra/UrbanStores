@@ -9,8 +9,8 @@ import com.netSet.urbanstores.base.BaseActivity
 import com.netSet.urbanstores.R
 import com.netSet.urbanstores.databinding.ActivityMainBinding
 import com.netSet.urbanstores.ui.cart.CartFrag
-import com.netSet.urbanstores.ui.myOrders.MyOrdersFrag
 import com.netSet.urbanstores.ui.notification.NotificationFrag
+import com.netSet.urbanstores.ui.orders.myOrders.FragmentMyOrders
 import com.netSet.urbanstores.ui.settings.SettingFrag
 import com.netSet.urbanstores.ui.shops.ShopsFragment
 
@@ -41,7 +41,7 @@ class MainActivity : BaseActivity() {
                     true
                 }
                 R.id.myorderMenu ->{
-                    supportFragmentManager.beginTransaction().replace(R.id.mainContainer,MyOrdersFrag()).commit()
+                    supportFragmentManager.beginTransaction().replace(R.id.mainContainer,FragmentMyOrders()).commit()
                     true
                 }
                 R.id.mycartMenu ->{
