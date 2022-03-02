@@ -10,7 +10,7 @@ import com.netSet.urbanstores.databinding.PopularItemsViewBinding
 
 class PopularItemsAdapter(val fragment: OrderConfirmFrag) : RecyclerView.Adapter<PopularItemsAdapter.ViewHolder>() {
 
-    var quantityList = arrayListOf("1Pcs","2Pcs","3Pcs","4Pcs","5Pcs","6Pcs","7Pcs","8Pcs","9Pcs","10Pcs")
+    var quantityList = arrayListOf("1 Pcs","2 Pcs","3 Pcs","4 Pcs","5 Pcs","6 Pcs","7 Pcs","8 Pcs","9 Pcs","10 Pcs")
 
     inner class ViewHolder(var binding : PopularItemsViewBinding) : RecyclerView.ViewHolder(binding.root){
         val noPcs = binding.quantitys
