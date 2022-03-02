@@ -42,7 +42,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="0dp"
-                        android:text="Rs. 28"
+                        android:text="Rs 28"
                         android:textColor="@color/amount_txt_color"
                         android:textSize="@dimen/_11sdp"
                         app:layout_constraintStart_toEndOf="@+id/productImg"
