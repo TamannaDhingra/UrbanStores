@@ -39,10 +39,6 @@ class FragmentOrderDetailsInfo : BaseFragment() {
 
         navigationBgVisiblity()
         setToolBar(R.mipmap.back_48x48,"ORDER DETAILS",0)
-        (activity as MainActivity).activityMainBinding?.profileImg?.setOnClickListener {
-            backStackCode()
-        }
-
         return binding.root
     }
 

@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             style="@style/regularHeadingTxts"
             android:text="Deliver to: Home"
-            android:layout_marginStart="@dimen/_2sdp"
+            android:layout_marginStart="@dimen/_5sdp"
             android:textColor="@color/checkout_bg_color"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toEndOf="@+id/locationImg"
@@ -43,7 +43,7 @@
             android:layout_marginTop="@dimen/_13sdp" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/changeLocation"
+            android:id="@+id/tvChangeOrderAddress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/sofiaproregular"
@@ -220,7 +220,7 @@
             android:layout_marginBottom="@dimen/_10sdp"
             android:backgroundTint="@color/green_bg"
             android:fontFamily="@font/sofiaprobold"
-            android:text="PRPCEED"
+            android:text="PROCEED"
             android:textColor="@color/white"
             android:textSize="@dimen/_12sdp"
             app:cornerRadius="@dimen/_4sdp"

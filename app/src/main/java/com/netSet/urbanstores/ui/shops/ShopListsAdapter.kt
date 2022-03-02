@@ -1,11 +1,13 @@
 package com.netSet.urbanstores.ui.shops
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.netSet.urbanstores.R
+import com.netSet.urbanstores.activities.MainActivity
 import com.netSet.urbanstores.databinding.ShopsViewBinding
 import com.netSet.urbanstores.ui.shops.ShopProducts.ShopProductsFrag
 
@@ -23,7 +25,7 @@ class ShopListsAdapter(val fragment: ShopsFragment) : RecyclerView.Adapter<ShopL
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.openProducts.setOnClickListener {
-            fragment.fragmentManager?.beginTransaction()?.replace(R.id.mainContainer,ShopProductsFrag())?.commit()
+           fragment.fragmentManager?.beginTransaction()?.replace(R.id.mainContainer,ShopProductsFrag())?.addToBackStack("")?.commit()
         }
     }
 

@@ -2,64 +2,117 @@ package com.netSet.urbanstores.activities
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
-import com.netSet.urbanstores.base.BaseActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import com.google.android.material.snackbar.Snackbar
 import com.netSet.urbanstores.R
+import com.netSet.urbanstores.base.BaseActivity
 import com.netSet.urbanstores.databinding.ActivityMainBinding
+import com.netSet.urbanstores.sharePreference.AppPref
 import com.netSet.urbanstores.ui.cart.CartFrag
 import com.netSet.urbanstores.ui.notification.NotificationFrag
 import com.netSet.urbanstores.ui.orders.myOrders.FragmentMyOrders
+import com.netSet.urbanstores.ui.phoneVerify.PhoneVerifyFragment
 import com.netSet.urbanstores.ui.settings.SettingFrag
+import com.netSet.urbanstores.ui.shops.ShopProducts.ShopProductsFrag
 import com.netSet.urbanstores.ui.shops.ShopsFragment
+
 
 class MainActivity : BaseActivity() {
 
-    var activityMainBinding : ActivityMainBinding ?=null
-
+    lateinit var activityMainBinding : ActivityMainBinding
+    var appPrefs = AppPref(this)
+    private  var data: String ? =null
     @RequiresApi(Build.VERSION_CODES.M)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        activityMainBinding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+        activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        allProductsLists()
+        onClick()
+        data=appPrefs.getValue("phone")
 
-        supportFragmentManager.beginTransaction().replace(R.id.mainContainer,ShopsFragment()).commit()
-        getWindow()?.setStatusBarColor(this.getColor(R.color.green_bg))
-
-        openNotificationFrag()
-        bottomNavigationcode()
-        addProducts()
-        activityMainBinding?.bottomGreenBg?.visibility = View.GONE
+        if (data.isNullOrEmpty()){
+          replaceFragment(PhoneVerifyFragment(),true,false)
+        }
+        else{
+            replaceFragment(ShopsFragment(), true, false)
+        }
+        window?.statusBarColor = this.getColor(R.color.green_bg)
+        bottomNavigationCode()
+        activityMainBinding.bottomGreenBg.visibility = View.GONE
+        activityMainBinding.profileImg.tag ="profileImg"
     }
 
-    private fun bottomNavigationcode() {
-        activityMainBinding?.bottomNavigationView?.setItemIconTintList(null)
-        activityMainBinding?.bottomNavigationView?.setOnNavigationItemSelectedListener {
+    private fun onClick() {
+        activityMainBinding.profileImg.setOnClickListener {
+            if (getVisibleFragment() is ShopsFragment||getVisibleFragment() is ShopProductsFrag){
+                activityMainBinding.bottomNavigationView.selectedItemId = R.id.settingsMenu
+            }else {
+                onBackStackChanged()
+            }
+        }
+        activityMainBinding.menuIcon.setOnClickListener {
+            replaceFragment(NotificationFrag(),true,false)
+        }
+    }
+
+    private fun bottomNavigationCode() {
+
+        activityMainBinding.bottomNavigationView.setOnNavigationItemSelectedListener {
             when(it.itemId){
                 R.id.homeMenu ->{
-                    supportFragmentManager.beginTransaction().replace(R.id.mainContainer,ShopsFragment()).commit()
+                    replaceFragment(ShopsFragment(), true, false)
                     true
                 }
                 R.id.myorderMenu ->{
-                    supportFragmentManager.beginTransaction().replace(R.id.mainContainer,FragmentMyOrders()).commit()
+                    replaceFragment(FragmentMyOrders(), true, false)
                     true
                 }
                 R.id.mycartMenu ->{
-                    supportFragmentManager.beginTransaction().replace(R.id.mainContainer,CartFrag()).commit()
+                    replaceFragment(CartFrag(), true, false)
                     true
                 }
                 R.id.settingsMenu ->{
-                    supportFragmentManager.beginTransaction().replace(R.id.mainContainer,SettingFrag()).commit()
+                    replaceFragment(SettingFrag(), true, false)
                     true
                 }
                 else -> false
             }
         }
     }
+    override fun onBackPressed() {
+      //  super.onBackPressed()
+        onBackStackChanged()
+    }
+    private fun getVisibleFragment(): Fragment {
+        return supportFragmentManager.findFragmentById(R.id.mainContainer)!!
+    }
+    fun onBackStackChanged() {
+        val localFragmentManager = supportFragmentManager
+        val i = localFragmentManager.backStackEntryCount
+            if (getVisibleFragment() is ShopsFragment||getVisibleFragment() is PhoneVerifyFragment ){
+                finish()
+        } else if (getVisibleFragment() is FragmentMyOrders|| getVisibleFragment() is CartFrag||getVisibleFragment() is SettingFrag){
+                activityMainBinding.bottomNavigationView.selectedItemId = R.id.homeMenu
 
-    private fun openNotificationFrag() {
-        activityMainBinding?.menuIcon?.setOnClickListener {
-            supportFragmentManager.beginTransaction().replace(R.id.mainContainer,NotificationFrag()).addToBackStack(null).commit()
+        } else {
+                localFragmentManager.popBackStack()
+            }
+   }
+    fun showSnackBar(string: String) {
+        try {
+            val snackBar: Snackbar = Snackbar.make(findViewById(android.R.id.content), string, Snackbar.LENGTH_SHORT)
+            val snackBarView = snackBar.view
+            snackBarView.setBackgroundColor(ContextCompat.getColor(this, R.color.appbar_bg))
+            snackBar.show()
+        }
+        catch (e: java.lang.Exception) {
         }
     }
 }

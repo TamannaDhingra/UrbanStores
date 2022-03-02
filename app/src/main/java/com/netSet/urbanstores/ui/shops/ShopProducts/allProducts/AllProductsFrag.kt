@@ -9,9 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.netSet.urbanstores.R
 import com.netSet.urbanstores.base.BaseFragment
 import com.netSet.urbanstores.databinding.FragmentAllProductsBinding
-import com.netSet.urbanstores.ui.shops.ShopProducts.CartCallback
 
-class AllProductsFrag() : BaseFragment(),CartCallback {
+class AllProductsFrag() : BaseFragment() {
 
     var binding : FragmentAllProductsBinding ?=null
     var adapter : AllproductsAdapter ?= null
@@ -24,29 +23,50 @@ class AllProductsFrag() : BaseFragment(),CartCallback {
         return rootView
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    override fun onResume() {
+        super.onResume()
         allProductsAdapterCall()
-        getBaseActivity().cartCallback = this
     }
 
     private fun allProductsAdapterCall() {
-        adapter = AllproductsAdapter(this,getBaseActivity().productsList,getBaseActivity())
+
+        if (getBaseActivity().tabPosition == 0){
+            adapter = AllproductsAdapter(this,getBaseActivity().shopProductsList,getBaseActivity())
+
+        }else if (getBaseActivity().tabPosition == 1){
+            adapter = AllproductsAdapter(this,getBaseActivity().getFilterFruits(),getBaseActivity())
+
+        }else if (getBaseActivity().tabPosition == 2){
+            adapter = AllproductsAdapter(this,getBaseActivity().getFilterVegetable(),getBaseActivity())
+
+        }else if (getBaseActivity().tabPosition == 3){
+            adapter = AllproductsAdapter(this,getBaseActivity().getFilterPackages(),getBaseActivity())
+        }
+
         val manager = LinearLayoutManager(context)
         binding?.allProductsRecycler?.setHasFixedSize(true)
         binding?.allProductsRecycler?.layoutManager = manager
         binding?.allProductsRecycler?.adapter = adapter
-    }
 
-    override fun addtocart(position: Int, selectedItem: Int) {
-        getBaseActivity().productsList.get(position).productPcs = selectedItem
-        getBaseActivity().productsList.get(position).isAddedToCart = true
         adapter?.notifyDataSetChanged()
     }
 
-    override fun removefromcart(position: Int) {
-        getBaseActivity().productsList.get(position).isAddedToCart = false
-        adapter?.notifyDataSetChanged()
+    fun addtocart(productId: Int) {
+
+        for(i in 0 until getBaseActivity().shopProductsList.size) {
+            if (productId == getBaseActivity().shopProductsList[i].id){
+                getBaseActivity().shopProductsList.get(i).isAddedToCart = true
+                adapter?.notifyDataSetChanged()
+            }
+        }
+    }
+
+    fun removefromcart(productId: Int) {
+        for(i in 0 until getBaseActivity().shopProductsList.size) {
+            if (productId == getBaseActivity().shopProductsList[i].id){
+                getBaseActivity().shopProductsList.get(i).isAddedToCart = false
+                adapter?.notifyDataSetChanged()
+            }
+        }
     }
 }

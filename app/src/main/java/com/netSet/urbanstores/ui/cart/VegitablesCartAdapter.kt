@@ -6,14 +6,13 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.netSet.urbanstores.R
-import com.netSet.urbanstores.base.BaseActivity
 import com.netSet.urbanstores.databinding.CartViewBinding
-import com.netSet.urbanstores.databinding.VegitablesCartViewBinding
-import com.netSet.urbanstores.models.AllProductsModel
+import com.netSet.urbanstores.models.ShopProductsList
+
 
 class VegitablesCartAdapter(
     val fragment: CartFrag,
-    val productsList: List<AllProductsModel>
+    val vegeList: List<ShopProductsList>
 ) : RecyclerView.Adapter<VegitablesCartAdapter.ViewHolder>() {
 
     inner class ViewHolder(val binding : CartViewBinding) : RecyclerView.ViewHolder(binding.root){
@@ -53,21 +52,21 @@ class VegitablesCartAdapter(
         }
 
         //values  Initialization
-        holder.proName.text = productsList.get(position).productname
-        holder.proPrice.text = productsList.get(position).productPrice.toString() +" Rs."
-        holder.proDiscount.text = productsList.get(position).productPrice.toString()
-        holder.vegeImg.setImageResource(productsList.get(position).productImg)
-        holder.productDiscount.text = productsList.get(position).discount + "% \n off"
-        holder.proPcs.text = (productsList.get(position).productPcs+1).toString() + " Pcs"
-        holder.items.text = (productsList.get(position).productPcs+1).toString()
+        holder.proName.text = vegeList.get(position).productname
+        holder.proPrice.text =  "Rs "+vegeList.get(position).productPrice.toString()
+        holder.proDiscount.text = "Rs "+vegeList.get(position).productPrice.toString()
+        holder.vegeImg.setImageResource(vegeList.get(position).productImg)
+        holder.productDiscount.text = vegeList.get(position).discount.toString()+"%\noff"
+        holder.proPcs.text = (vegeList.get(position).productPcs+1).toString() + " Pcs"
+        holder.items.text = (vegeList.get(position).productPcs+1).toString()
 
         //Total Price Logic
-        val totalFruitPrice = productsList.get(position).productPrice.toString().toInt()
-        val totalFruitPcs = productsList.get(position).productPcs.toString().toInt()+1
+        val totalFruitPrice = vegeList.get(position).productPrice.toString().toInt()
+        val totalFruitPcs = vegeList.get(position).productPcs.toString().toInt()+1
         val finalPrice = totalFruitPrice*totalFruitPcs
 
         //Discount Value Set in final
-        fragment.getBaseActivity().totalDiscountAmount = fragment.getBaseActivity().totalDiscountAmount+productsList.get(position).discount.toInt()
+        fragment.getBaseActivity().totalDiscountAmount = fragment.getBaseActivity().totalDiscountAmount+vegeList.get(position).discount.toInt()
 
         //Set Total Price
         fragment.getBaseActivity().cartTotalAmount += finalPrice
@@ -76,6 +75,6 @@ class VegitablesCartAdapter(
     }
 
     override fun getItemCount(): Int {
-        return productsList.size
+        return vegeList.size
     }
 }

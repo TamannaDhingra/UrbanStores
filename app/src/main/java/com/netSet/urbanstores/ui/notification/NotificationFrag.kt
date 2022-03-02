@@ -31,9 +31,9 @@ class NotificationFrag : BaseFragment() {
         notificationAdapter()
         navigationBgVisiblity()
         setToolBar(R.mipmap.back_48x48,"NOTIFICATIONS",0)
-        (activity as MainActivity).activityMainBinding?.profileImg?.setOnClickListener {
+   /*     (activity as MainActivity).activityMainBinding?.profileImg?.setOnClickListener {
             backStackCode()
-        }
+        }*/
     }
 
     override fun onDestroy() {

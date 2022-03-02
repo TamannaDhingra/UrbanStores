@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.netSet.urbanstores.R
 import com.netSet.urbanstores.models.AllProductsModel
+import com.netSet.urbanstores.models.ShopProductsList
 import com.netSet.urbanstores.ui.shops.ShopProducts.CartCallback
 import com.netSet.urbanstores.ui.shops.ShopProducts.allProducts.AllproductsAdapter
 
@@ -19,15 +20,17 @@ open class BaseActivity : AppCompatActivity() {
     var fragmentTransaction : FragmentTransaction?= null
     var adapter : AllproductsAdapter?= null
     var cartCallback : CartCallback ?=null
+    var shopProductsList : ArrayList<ShopProductsList> = ArrayList()
     var productsList : ArrayList<AllProductsModel> = ArrayList()
     var cartTotalAmount : Int = 0
+    var tabPosition : Int = 0
     var totalDiscountAmount : Int = 0
 
-    fun replaceFragment(mFragment : Fragment, isBack : Boolean, allowAnim : Boolean){
+    fun replaceFragment(mFragment: Fragment, isBack: Boolean, allowAnim: Boolean){
         currentFragment = mFragment
         fragmentTransaction = supportFragmentManager.beginTransaction()
 
-        if (isBack){ fragmentTransaction?.addToBackStack("") }
+        if (isBack){ fragmentTransaction!!.addToBackStack(mFragment::class.java.simpleName) }
 
         if (allowAnim){
             fragmentTransaction?.setCustomAnimations(
@@ -36,7 +39,7 @@ open class BaseActivity : AppCompatActivity() {
                 R.anim.enter_from_left,
                 R.anim.exit_to_right
             )}
-        fragmentTransaction?.replace(R.id.mainContainer,currentFragment!!,"")?.commitAllowingStateLoss()
+        fragmentTransaction?.replace(R.id.mainContainer,currentFragment!!, mFragment::class.java.simpleName)?.commit()
     }
 
     //hide Keyboard on screen touch
@@ -58,11 +61,48 @@ open class BaseActivity : AppCompatActivity() {
         return super.dispatchTouchEvent(ev)
     }
     fun addProducts() {
-        productsList.add(AllProductsModel(R.mipmap.img_3,"Potato",90,"50",false,"Vegetables",0))
-        productsList.add(AllProductsModel(R.mipmap.img_4,"Apple",80,"10",false,"Fruits",0))
-        productsList.add(AllProductsModel(R.mipmap.img_3,"Tomato",40,"40",false,"Vegetables",0))
-        productsList.add(AllProductsModel(R.mipmap.img_4,"Mango",80,"50",false,"Fruits",0))
-        productsList.add(AllProductsModel(R.mipmap.img_4,"Grapes",70,"70",false,"Fruits",0))
+        productsList.add(AllProductsModel(1,R.mipmap.img_3,"Potato",90,"50",false,"Vegetables",0))
+        productsList.add(AllProductsModel(2,R.mipmap.img_4,"Apple",80,"10",false,"Fruits",0))
+        productsList.add(AllProductsModel(3,R.mipmap.img_3,"Tomato",40,"40",false,"Vegetables",0))
+        productsList.add(AllProductsModel(4,R.mipmap.img_4,"Mango",80,"50",false,"Fruits",0))
+        productsList.add(AllProductsModel(5,R.mipmap.img_4,"Grapes",70,"70",false,"Fruits",0))
+    }
+    fun allProductsLists(){
+        shopProductsList.add(ShopProductsList(1,R.mipmap.img_4,"Banana - Yelakki",90,10,false,"Fruits",0))
+        shopProductsList.add(ShopProductsList(2,R.mipmap.img_3,"Fresh Onion",40,10,false,"Vegetables",0))
+        shopProductsList.add(ShopProductsList(3,R.mipmap.img_2,"Green Salad Package",150,0,false,"Packages",0))
+        shopProductsList.add(ShopProductsList(4,R.mipmap.img_4,"Potato",90,20,false,"Vegetables",0))
+    }
+    fun clearBackStack(){
+       val count = supportFragmentManager.backStackEntryCount
+        if (count>0){
+            for (i in 0..count){
+                supportFragmentManager.popBackStack()
+            }
+        }
+    }
+    //filtered fruits
+    fun getFilterFruits(): ArrayList<ShopProductsList> {
+        val fruitList = shopProductsList.filter {
+            it.productCategory.equals("Fruits")
+        }
+        return fruitList as ArrayList<ShopProductsList>
+    }
+
+    //filtered vegetables //second
+    fun getFilterVegetable(): ArrayList<ShopProductsList> {
+        var vegeList = shopProductsList.filter {
+            it.productCategory.equals("Vegetables")
+        }
+        return vegeList as ArrayList<ShopProductsList>
+    }
+
+    //filtered packges
+    fun getFilterPackages(): ArrayList<ShopProductsList> {
+        var packageList = shopProductsList.filter {
+            it.productCategory.equals("Packages")
+        }
+        return packageList as ArrayList<ShopProductsList>
     }
 
 

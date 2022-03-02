@@ -10,6 +10,8 @@ import com.netSet.urbanstores.R
 import com.netSet.urbanstores.activities.MainActivity
 import com.netSet.urbanstores.base.BaseFragment
 import com.netSet.urbanstores.databinding.FragmentOrderConfirmBinding
+import com.netSet.urbanstores.ui.payment.PaymentFragment
+import com.netSet.urbanstores.ui.shops.LocationBottomSheet
 
 class OrderConfirmFrag : BaseFragment() {
 
@@ -29,16 +31,44 @@ class OrderConfirmFrag : BaseFragment() {
         adapterCall()
         navigationBgVisiblity()
         hideBottomNavigation()
+//        getTotalAmntUsingBundle()
+//        grandTotalAmnt()
+        initUI()
         setToolBar(R.mipmap.back_48x48,"CONFIRM",0)
-        (activity as MainActivity).activityMainBinding?.profileImg?.setOnClickListener {
-            backStackCode()
+    }
+
+    private fun initUI() {
+        binding?.tvChangeOrderAddress?.setOnClickListener {
+            val locationBottomSheet= LocationBottomSheet()
+            locationBottomSheet.show(requireActivity().supportFragmentManager,"Location bottom Sheet")
+        }
+        binding?.confirmOrderBtn?.setOnClickListener {
+            (activity as MainActivity).replaceFragment(PaymentFragment(), true, false,)
         }
     }
+
+/*
+    private fun grandTotalAmnt() {
+        if (binding?.itemtotalAmnt?.text.toString().toInt()>0){
+            binding?.deliveryChargeAmnt?.text = 20.toString()
+        }
+
+        val totalAmnt = binding?.itemtotalAmnt?.text.toString().toInt()
+        val deliveryAmnt = binding?.deliveryChargeAmnt?.text.toString().toInt()
+        binding?.grandTotalAmnt?.text = (totalAmnt+deliveryAmnt).toString()
+    }
+*/
+
+/*    private fun getTotalAmntUsingBundle() {
+        val ttlAmnt = arguments?.getInt("totalAmount")
+        binding?.itemtotalAmnt?.text = ttlAmnt.toString()
+    }*/
 
     override fun onDestroy() {
         super.onDestroy()
         showBottomNavigation()
     }
+
     private fun adapterCall() {
         adapter = PopularItemsAdapter(this)
         val manager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
@@ -46,5 +76,4 @@ class OrderConfirmFrag : BaseFragment() {
         binding?.popularItemsRecycler?.layoutManager = manager
         binding?.popularItemsRecycler?.adapter = adapter
     }
-
 }

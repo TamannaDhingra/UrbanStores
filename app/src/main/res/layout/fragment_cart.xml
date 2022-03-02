@@ -9,6 +9,7 @@
         tools:context=".ui.cart.CartFrag">
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:fillViewport="true"
@@ -31,9 +32,9 @@
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_10sdp"
                         android:fontFamily="@font/sofiaprosemibold"
                         android:text="Fruits"
+                        android:layout_marginStart="@dimen/_13sdp"
                         android:textColor="@color/cart_item_txt_color"
                         android:textSize="@dimen/_11sdp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -44,7 +45,7 @@
                         android:id="@+id/fruitsCount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_13sdp"
                         android:fontFamily="@font/sofiaprosemibold"
                         android:text="1 item"
                         android:textColor="@color/item_count_txt_color"
@@ -71,7 +72,7 @@
                         android:fontFamily="@font/sofiaprosemibold"
                         android:text="Vegitables"
                         android:textColor="@color/cart_item_txt_color"
-                        android:textSize="@dimen/_11sdp"
+                        android:textSize="@dimen/_13sdp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -80,7 +81,7 @@
                         android:id="@+id/vegetableCount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_13sdp"
                         android:fontFamily="@font/sofiaprosemibold"
                         android:text="1 item"
                         android:textColor="@color/item_count_txt_color"
@@ -104,6 +105,50 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/vegitablesConstraint" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/packageConstraint"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_30sdp"
+                    android:background="#F2F2F2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/vegitablesRecyclerview">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:fontFamily="@font/sofiaprosemibold"
+                        android:text="Packages"
+                        android:textColor="@color/cart_item_txt_color"
+                        android:textSize="@dimen/_13sdp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/packageCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/_13sdp"
+                        android:fontFamily="@font/sofiaprosemibold"
+                        android:text="0 item"
+                        android:textColor="@color/item_count_txt_color"
+                        android:textSize="@dimen/_11sdp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/packageRecyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/packageConstraint" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
@@ -146,8 +191,10 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/checkoutBtn"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/_32sdp"
+                android:layout_height="@dimen/_35sdp"
                 android:layout_marginTop="@dimen/_5sdp"
+                android:paddingHorizontal="@dimen/_15sdp"
+                android:textSize="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:fontFamily="@font/sofiaprosemibold"
                 android:gravity="center"
@@ -156,5 +203,17 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/noDataFoundTxt"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:textSize="@dimen/_15sdp"
+            android:visibility="gone"
+            android:textColor="@color/cart_item_txt_color"
+            android:text="No Data Found"
+            app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -1,25 +1,44 @@
-package com.netSet.urbanstores.ui.shops.ShopProducts
 
+import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.RecyclerView
+import android.widget.ImageView
+import android.widget.LinearLayout
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.viewpager.widget.PagerAdapter
 import com.netSet.urbanstores.R
-import com.netSet.urbanstores.databinding.ShopproductsViewBinding
+import java.util.*
 
-class ShopDiscountsAdapters : RecyclerView.Adapter<ShopDiscountsAdapters.ViewHolder>() {
-
-    inner class ViewHolder(val binding : ShopproductsViewBinding) : RecyclerView.ViewHolder(binding.root){}
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding= DataBindingUtil.inflate<ShopproductsViewBinding>(LayoutInflater.from(parent.context),
-            R.layout.shopproducts_view,parent,false)
-        return ViewHolder(binding)
+class ShopDiscountsAdapters(var context: Context?) : PagerAdapter() {
+    // Layout Inflater
+    var mLayoutInflater: LayoutInflater
+    override fun getCount(): Int {
+        // return the number of images
+        return 4
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {}
+    override fun isViewFromObject(view: View, `object`: Any): Boolean {
+        return view === `object` as ConstraintLayout
+    }
 
-    override fun getItemCount(): Int {
-        return 3
+    override fun instantiateItem(container: ViewGroup, position: Int): Any {
+        // inflating the item.xml
+        val itemView: View = mLayoutInflater.inflate(R.layout.shopproducts_view, container, false)
+
+
+        // Adding the View
+        Objects.requireNonNull(container).addView(itemView)
+        return itemView
+    }
+
+    override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
+        container.removeView(`object` as ConstraintLayout)
+    }
+
+    // Viewpager Constructor
+    init {
+        mLayoutInflater =
+            context?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
     }
 }

@@ -2,6 +2,7 @@ package com.netSet.urbanstores.ui.orders.myOrders
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,6 +11,7 @@ import com.netSet.urbanstores.activities.MainActivity
 import com.netSet.urbanstores.base.BaseFragment
 import com.netSet.urbanstores.databinding.FragmentMyOrdersBinding
 import com.netSet.urbanstores.models.ModelClssMyOrders
+import com.netSet.urbanstores.ui.settings.SettingFrag
 
 
 class FragmentMyOrders : BaseFragment() {
@@ -29,10 +31,10 @@ class FragmentMyOrders : BaseFragment() {
 
         navigationBgVisiblity()
         setToolBar(R.mipmap.profile,"MY ORDERS",R.mipmap.bell_3x)
-        (activity as MainActivity).activityMainBinding?.profileImg?.setOnClickListener {
-            backStackCode()
-        }
-
+        showBottomNavigation()
+     /*   (activity as MainActivity).activityMainBinding.profileImg.setOnClickListener {
+            (activity as MainActivity).replaceFragment(SettingFrag(),true,false)
+        }*/
         val recyclerAdapter = AdapterMyOrders(arrayList, getBaseActivity())
         binding.rvOrderInProgress.layoutManager = LinearLayoutManager(requireContext())
         binding.rvOrderInProgress.adapter = recyclerAdapter

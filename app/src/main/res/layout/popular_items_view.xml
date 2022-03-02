@@ -83,10 +83,12 @@
 
                 <androidx.appcompat.widget.AppCompatSpinner
                     android:id="@+id/quantitys"
-                    android:layout_width="@dimen/_50sdp"
+                    android:layout_width="@dimen/_57sdp"
+                    android:padding="@dimen/_2sdp"
                     android:layout_height="@dimen/_18sdp"
-                    android:layout_marginTop="@dimen/_5sdp"
                     android:background="@drawable/rect_bg"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:layout_marginBottom="@dimen/_13sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/rsLinear" />
@@ -106,7 +108,7 @@
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/itemAddButton"
                     android:layout_width="@dimen/_47sdp"
-                    android:layout_height="@dimen/_27sdp"
+                    android:layout_height="@dimen/_30sdp"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:layout_marginBottom="@dimen/_10sdp"
                     android:text="@string/add_button"

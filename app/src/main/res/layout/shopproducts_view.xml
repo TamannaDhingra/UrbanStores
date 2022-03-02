@@ -9,10 +9,11 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/shopImg"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_150sdp"
+            android:layout_height="@dimen/_135sdp"
+            android:layout_marginHorizontal="@dimen/_7sdp"
             android:scaleType="fitXY"
             android:src="@mipmap/img_1"
-            android:layout_marginHorizontal="@dimen/_7sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

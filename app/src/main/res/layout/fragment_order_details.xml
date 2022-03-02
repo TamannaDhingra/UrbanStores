@@ -10,6 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         tools:context=".ui.orders.orderDetails.FragmentOrderDetails">
 
         <androidx.core.widget.NestedScrollView
@@ -105,7 +106,7 @@
                             android:layout_marginTop="@dimen/tv_margin_top"
                             android:layout_marginEnd="@dimen/tv_margin_start"
                             android:fontFamily="@font/sofiapromedium"
-                            android:text="1 X Banana-Yekali(12pcs),1X-Onion"
+                            android:text="1 X Banana - Yekali (12 pcs),1 X Onion 1 Kg"
                             android:textColor="@color/black"
                             android:textSize="@dimen/details_text_size"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -174,7 +175,7 @@
                             android:layout_marginStart="@dimen/tv_margin_start"
                             android:layout_marginTop="@dimen/margin_top"
                             android:fontFamily="@font/sofiapro_light"
-                            android:text="Payment VIA"
+                            android:text="PAYMENT VIA"
                             android:textSize="@dimen/heading_text_size"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/tv_total_amount_details" />
@@ -182,8 +183,8 @@
 
                         <ImageView
                             android:id="@+id/tv_payment_img"
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/_20sdp"
+                            android:layout_width="@dimen/_22sdp"
+                            android:layout_height="@dimen/_22sdp"
                             android:layout_marginStart="@dimen/tv_margin_start"
                             android:layout_marginTop="@dimen/_5sdp"
                             android:src="@mipmap/make_payment"
@@ -227,7 +228,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_track_order"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_285sdp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/start_margin_order_details"
                     android:layout_marginTop="@dimen/_15sdp"
                     tools:itemCount="5"
@@ -275,15 +276,34 @@
                     android:background="@color/green_bg"
                     app:layout_constraintEnd_toEndOf="@+id/textView14"
                     app:layout_constraintTop_toBottomOf="@+id/textView14" />
-
-                <FrameLayout
+                <com.netSet.urbanstores.ui.maps.CustomScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_150sdp"
-                   android:id="@+id/map_container"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:id="@+id/nestedScroll"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginTop="@dimen/_14sdp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/view2" />
+                    app:layout_constraintTop_toBottomOf="@+id/view2">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <fragment
+                            android:id="@+id/mapContainer"
+                            android:name="com.google.android.gms.maps.SupportMapFragment"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_150sdp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:context=".ui.maps.MapsFragment" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.netSet.urbanstores.ui.maps.CustomScrollView>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

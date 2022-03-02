@@ -1,13 +1,10 @@
 package com.netSet.urbanstores.ui.orders.myOrders
 
-import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.marginTop
 import androidx.recyclerview.widget.RecyclerView
-import com.netSet.urbanstores.R
 import com.netSet.urbanstores.activities.MainActivity
 import com.netSet.urbanstores.base.BaseActivity
 import com.netSet.urbanstores.databinding.InflaterMyOrdersBinding
@@ -22,16 +19,13 @@ class AdapterMyOrders(var arrayList123: ArrayList<ModelClssMyOrders>,val baseAct
         fun orderDetails(String: ModelClssMyOrders) {
             binding.orderDetails = String
             binding.cardView.setOnClickListener {
-                baseActivity.replaceFragment(FragmentOrderDetails(),true,false)
+                baseActivity.replaceFragment(FragmentOrderDetails(), true, false,)
             }
-
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderClass {
-        val binding =
-            InflaterMyOrdersBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = InflaterMyOrdersBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolderClass(binding)
 
     }

@@ -1,29 +1,32 @@
 package com.netSet.urbanstores.ui.shops.ShopProducts
 
+import ShopDiscountsAdapters
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.netSet.urbanstores.R
 import com.netSet.urbanstores.base.BaseFragment
 import com.netSet.urbanstores.databinding.FragmentShopProductsBinding
-import com.netSet.urbanstores.models.AllProductsModel
+import com.netSet.urbanstores.ui.shops.ShopProducts.allProducts.AllProductsFrag
 
-class ShopProductsFrag : BaseFragment() {
+class ShopProductsFrag : BaseFragment(), TabLayout.OnTabSelectedListener {
 
     var binding : FragmentShopProductsBinding ?=null
-    var adapter : ShopDiscountsAdapters = ShopDiscountsAdapters()
-
+    var adapter : ShopDiscountsAdapters ?=null
+    var productsTabAdapter : ProductsTabAdapter ?= null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         if (rootView== null) {
             binding = DataBindingUtil.inflate(inflater, R.layout.fragment_shop_products, container, false)
             rootView = binding?.root
-            viewPagerCode()
+            setupViewPager()
         }
         return rootView
     }
@@ -34,59 +37,50 @@ class ShopProductsFrag : BaseFragment() {
         discountsAdapterCall()
     }
 
-    private fun viewPagerCode() {
+    private fun setupViewPager() {
 
-        binding?.productsTabLayout?.addTab(binding?.productsTabLayout?.newTab()?.setText("All")!!)
-        binding?.productsTabLayout?.addTab(
-            binding?.productsTabLayout?.newTab()?.setText("Fruits")!!
-        )
-        binding?.productsTabLayout?.addTab(
-            binding?.productsTabLayout?.newTab()?.setText("Vegitables")!!
-        )
-        binding?.productsTabLayout?.addTab(
-            binding?.productsTabLayout?.newTab()?.setText("Packages")!!
-        )
-        binding?.productsTabLayout?.setTabGravity(TabLayout.GRAVITY_FILL)
+        productsTabAdapter = ProductsTabAdapter(this)
+        productsTabAdapter?.addFragment(AllProductsFrag())
+        productsTabAdapter?.addFragment(AllProductsFrag())
+        productsTabAdapter?.addFragment(AllProductsFrag())
+        productsTabAdapter?.addFragment(AllProductsFrag())
+        binding?.productsViewPager?.adapter = productsTabAdapter
 
-        val adapter = ProductsTabAdapter(
-            this, childFragmentManager, binding?.productsTabLayout?.tabCount!!,
-            binding?.productsTabLayout!!)
+        binding?.productsViewPager?.clipToPadding = false
+        binding?.productsViewPager?.clipChildren = false
+        binding?.productsViewPager?.offscreenPageLimit = ViewPager2.OFFSCREEN_PAGE_LIMIT_DEFAULT
+        binding?.productsViewPager?.getChildAt(0)?.overScrollMode = RecyclerView.OVER_SCROLL_NEVER
+        binding?.productsTabLayout?.addOnTabSelectedListener(this)
 
-        binding?.productsViewPager?.adapter = adapter
-
-        binding?.productsViewPager?.addOnPageChangeListener(object :
-            ViewPager.OnPageChangeListener {
-            override fun onPageScrolled(
-                position: Int,
-                positionOffset: Float,
-                positionOffsetPixels: Int
-            ) {
+        TabLayoutMediator(binding?.productsTabLayout!!, binding?.productsViewPager!!) { tab, position ->
+            when(position) {
+                0 -> {
+                    tab.text = "All"
+                }
+                1-> {
+                    tab.text = "Fruit"
+                }
+                2 -> {
+                    tab.text = "Vegetable"
+                }
+                3 -> {
+                    tab.text = "Packages"
+                }
             }
-
-            override fun onPageSelected(position: Int) {
-                binding?.productsTabLayout?.getTabAt(position)?.select()
-            }
-
-            override fun onPageScrollStateChanged(state: Int) {}
-        })
-
-        binding?.productsTabLayout?.addOnTabSelectedListener(object :
-            TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                binding?.productsViewPager?.currentItem = tab?.position!!
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab?) {}
-
-            override fun onTabReselected(tab: TabLayout.Tab?) {}
-        })
+        }.attach()
     }
 
     private fun discountsAdapterCall() {
-        val manager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
-        binding?.discountProducts?.setHasFixedSize(true)
-        binding?.discountProducts?.layoutManager = manager
-        binding?.discountProducts?.adapter = adapter
+        val viewPagerAdapter = ShopDiscountsAdapters(context)
+        binding?.discountProducts?.adapter = viewPagerAdapter
+        viewPagerAdapter.notifyDataSetChanged()
     }
 
+    override fun onTabSelected(tab: TabLayout.Tab?) {
+        getBaseActivity().tabPosition = tab?.position!!
+    }
+
+    override fun onTabUnselected(tab: TabLayout.Tab?) {}
+
+    override fun onTabReselected(tab: TabLayout.Tab?) {}
 }

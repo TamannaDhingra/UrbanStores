@@ -14,73 +14,88 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/green_bg"
+            android:focusableInTouchMode="true"
             android:paddingBottom="@dimen/_10sdp"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/currentLocation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Industrial area 8b, Mohali"
-                app:layout_constraintStart_toStartOf="parent"
-                android:drawableStart="@mipmap/location_3x"
-                android:drawablePadding="@dimen/_2sdp"
-                app:layout_constraintTop_toTopOf="parent"
-                android:textColor="@color/white"
-                android:layout_marginStart="@dimen/_15sdp"
-                android:fontFamily="@font/sofiaproregular" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="@dimen/_10sdp"
-                android:layout_height="@dimen/_15sdp"
-                android:src="@mipmap/bottom_3x"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginStart="@dimen/_5sdp"
-                app:layout_constraintStart_toEndOf="@+id/currentLocation" />
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/search_constraint"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_44sdp"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:orientation="horizontal"
+                android:layout_height="wrap_content"
+                android:background="@color/green_bg"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/currentLocation">
+                app:layout_constraintTop_toTopOf="parent">
 
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/searchProducts"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/_30sdp"
-                    android:background="@drawable/search_bg"
-                    android:drawablePadding="@dimen/_8sdp"
-                    android:fontFamily="@font/sofiapromedium"
-                    android:hint="Search for Vegitables/Fruits/Packages"
-                    android:paddingVertical="@dimen/_6sdp"
-                    android:paddingStart="@dimen/_8sdp"
-                    android:inputType="text"
-                    android:textSize="@dimen/_11sdp"
-                    android:paddingEnd="@dimen/_20sdp"
-                    android:drawableStart="@mipmap/search_3x"
-                    android:layout_marginHorizontal="@dimen/_9sdp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/currentLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_marginStart="@dimen/_17sdp"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@mipmap/location_3x"
+                    android:ellipsize="end"
+                    android:maxEms="20"
+                    android:lines="1"
+                    android:drawablePadding="@dimen/_2sdp"
+                    android:fontFamily="@font/sofiaproregular"
+                    android:text="Industrial area 8b, Mohali"
+                    android:textColor="@color/white"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/filterProImg"
-                    android:layout_width="@dimen/_17sdp"
-                    android:layout_height="@dimen/_17sdp"
-                    android:layout_gravity="center"
-                    android:src="@mipmap/filter_3x"
-                    android:background="@color/white"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/searchProducts"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:id="@+id/expendTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/down_arrow"
+                    app:layout_constraintStart_toEndOf="@+id/currentLocation"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/search_constraint"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_44sdp"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/currentLocation">
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/searchProducts"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_35sdp"
+                        android:layout_marginHorizontal="@dimen/_13sdp"
+                        android:background="@drawable/search_bg"
+                        android:drawableStart="@mipmap/search_3x"
+                        android:drawablePadding="@dimen/_5sdp"
+                        android:fontFamily="@font/sofiapromedium"
+                        android:hint="Search for Vegitables/Fruits/Packages"
+                        android:inputType="text"
+                        android:paddingVertical="@dimen/_6sdp"
+                        android:paddingStart="@dimen/_8sdp"
+                        android:paddingEnd="@dimen/_20sdp"
+                        android:textSize="@dimen/_12sdp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/filterProImg"
+                        android:layout_width="@dimen/_17sdp"
+                        android:layout_height="@dimen/_17sdp"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:background="@color/white"
+                        android:src="@mipmap/filter_3x"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/searchProducts"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -98,13 +113,14 @@
             android:textSize="@dimen/_13sdp"
             android:fontFamily="@font/sofiaprosemibold"
             android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginStart="@dimen/_10sdp" />
+            android:layout_marginStart="@dimen/_13sdp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/shopsRecyclerView"
             android:layout_width="match_parent"
             android:background="@color/white"
             android:layout_height="0dp"
+            android:layout_marginHorizontal="@dimen/_13sdp"
             app:layout_constraintTop_toBottomOf="@+id/shopsCount"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginTop="@dimen/_5sdp"

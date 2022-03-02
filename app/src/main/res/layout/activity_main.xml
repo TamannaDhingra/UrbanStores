@@ -26,7 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/_7sdp"
+                android:layout_marginStart="@dimen/_13sdp"
                 android:src="@mipmap/profile_3x"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -51,7 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_13sdp"
                 android:src="@mipmap/bell_3x"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -63,7 +63,7 @@
             android:id="@+id/mainContainer"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+            app:layout_constraintBottom_toTopOf="@+id/bottomLay"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolBar" />
@@ -75,26 +75,34 @@
             android:background="@color/checkout_bg_color"
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/bottomNavigationView"
+            app:layout_constraintTop_toTopOf="@+id/bottomLay"
             app:layout_constraintEnd_toEndOf="parent"
             android:orientation="vertical" />
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottomNavigationView"
-            style="@style/Widget.MaterialComponents.BottomNavigationView"
+        <RelativeLayout
+            android:id="@+id/bottomLay"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_50sdp"
-            app:labelVisibilityMode="labeled"
-            app:itemIconTint="@null"
-            android:elevation="@dimen/_10sdp"
-            app:itemTextColor="@color/navigation_txt_color"
-            app:menu="@menu/bottom_nav_menu"
-            android:paddingTop="@dimen/_4sdp"
+            android:layout_height="wrap_content"
             android:background="@drawable/top_white_curve"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-           />
+            app:layout_constraintEnd_toEndOf="parent">
 
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottomNavigationView"
+                style="@style/Widget.MaterialComponents.BottomNavigationView"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp"
+                android:background="@drawable/top_white_curve"
+                android:elevation="@dimen/_10sdp"
+                android:paddingTop="@dimen/_4sdp"
+                app:itemIconTint="@color/navigation_txt_color"
+                app:itemTextColor="@color/navigation_txt_color"
+                app:labelVisibilityMode="labeled"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:menu="@menu/bottom_nav_menu" />
+        </RelativeLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

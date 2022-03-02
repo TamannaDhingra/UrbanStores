@@ -20,7 +20,7 @@ open class BaseFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
-        this.baseActivity = activity as BaseActivity
+        this.baseActivity = context as BaseActivity
         if (activity is MainActivity) {
             mainActivity = context as MainActivity
         }
@@ -31,9 +31,9 @@ open class BaseFragment : Fragment() {
     }
 
     fun setToolBar(profileIcon : Int,title: String, menuIcon : Int){
-        (activity as MainActivity).activityMainBinding?.profileImg?.setImageResource(profileIcon)
-        (activity as MainActivity).activityMainBinding?.title?.text = title
-        (activity as MainActivity).activityMainBinding?.menuIcon?.setImageResource(menuIcon)
+        (activity as MainActivity).activityMainBinding.profileImg.setImageResource(profileIcon)
+        (activity as MainActivity).activityMainBinding.title.text = title
+        (activity as MainActivity).activityMainBinding.menuIcon.setImageResource(menuIcon)
     }
 
     fun navigationBgVisiblity(){
@@ -55,29 +55,19 @@ open class BaseFragment : Fragment() {
     fun showBottomNavigation(){
         (activity as MainActivity).activityMainBinding?.bottomNavigationView?.visibility = View.VISIBLE
     }
-    
 
-    fun showSnackBar(text : String){
-        val snackBar = Snackbar.make(
-            requireActivity().findViewById(android.R.id.content),
-            text, Snackbar.LENGTH_LONG)
-        snackBar.view.setBackgroundColor(Color.parseColor("#293894"))
-        snackBar.show()
-    }
-
-    fun backStackCode(){
+/*    fun backStackCode(){
         getBaseActivity().supportFragmentManager.popBackStack()
-    }
-
+    }*/
     fun setImageUsingGlide(context: Fragment, url: String, imageView: ImageView){
         Glide.with(context)
             .load(url)
             .into(imageView)
     }
-
     fun showApiError(msg : String){
         Toast.makeText(context, "Error is $msg", Toast.LENGTH_SHORT).show()
     }
 
 
 }
+
