@@ -28,6 +28,8 @@ class FragmentOrderDetailsInfo : BaseFragment() {
         // Inflate the layout for this fragment
         binding= FragmentOrderDetailsInfoBinding.inflate(inflater,container,false)
 
+        counterGone()
+
         arrayList.add(ModelClassItems("1X Banana-Yekalli(12 Pcs)"))
         arrayList.add(ModelClassItems("1X Onion 1Kg"))
         arrayList.add(ModelClassItems("1X Potato 1Kg"))
@@ -37,11 +39,11 @@ class FragmentOrderDetailsInfo : BaseFragment() {
         binding.rvItemDetails.layoutManager = LinearLayoutManager(requireContext())
         binding.rvItemDetails.adapter = recyclerAdapter
 
-        navigationBgVisiblity()
+//        navigationBgVisiblity()
         setToolBar(R.mipmap.back_48x48,"ORDER DETAILS",0)
         return binding.root
     }
 
 
 
-    }
+}

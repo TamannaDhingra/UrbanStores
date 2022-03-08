@@ -11,6 +11,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import com.bumptech.glide.load.model.Model
 import com.netSet.urbanstores.R
+import com.netSet.urbanstores.activities.MainActivity
 import com.netSet.urbanstores.databinding.FragmentCongratulationsDialogBinding
 import com.netSet.urbanstores.databinding.FragmentVerificationBinding
 import com.netSet.urbanstores.models.BottomSheetLocationModel
@@ -46,6 +47,11 @@ class CongratulationsDialogFragment : DialogFragment() {
     private fun onClick() {
         dialogBinding.crossDismissDialog.setOnClickListener {
             dismiss()
+
+        }
+        dialogBinding.btnDone.setOnClickListener {
+            dismiss()
+            (activity as MainActivity).myOrder()
         }
 
     }

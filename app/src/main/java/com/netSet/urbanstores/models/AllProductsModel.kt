@@ -8,5 +8,5 @@ data class AllProductsModel(
     val discount: String,
     var isAddedToCart : Boolean,
     val productCategory : String,
-    var productPcs : Int
+    var productPcs : String
     )

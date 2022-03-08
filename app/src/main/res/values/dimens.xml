@@ -12,7 +12,7 @@
     <dimen name="tv_margin_end">@dimen/_20sdp</dimen>
     <dimen name="tv_margin_start">@dimen/_20sdp</dimen>
     <dimen name="margin_top">@dimen/_10sdp</dimen>
-    <dimen name="in_progress_padding_start">@dimen/_10sdp</dimen>
+    <dimen name="in_progress_padding_start">@dimen/_14sdp</dimen>
     <dimen name="inProgress_txt_size">@dimen/_12sdp</dimen>
     <dimen name="start_margin_order_details">@dimen/_10sdp</dimen>
 </resources>

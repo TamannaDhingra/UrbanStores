@@ -1,14 +1,18 @@
 package com.netSet.urbanstores.activities
 
+import android.app.AlertDialog
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import com.google.android.material.badge.BadgeDrawable
+import com.google.android.material.bottomnavigation.BottomNavigationMenuView
 import com.google.android.material.snackbar.Snackbar
 import com.netSet.urbanstores.R
 import com.netSet.urbanstores.base.BaseActivity
@@ -45,20 +49,20 @@ class MainActivity : BaseActivity() {
         }
         window?.statusBarColor = this.getColor(R.color.green_bg)
         bottomNavigationCode()
-        activityMainBinding.bottomGreenBg.visibility = View.GONE
+//        activityMainBinding.bottomGreenBg.visibility = View.GONE
         activityMainBinding.profileImg.tag ="profileImg"
     }
 
     private fun onClick() {
         activityMainBinding.profileImg.setOnClickListener {
-            if (getVisibleFragment() is ShopsFragment||getVisibleFragment() is ShopProductsFrag){
+            if (getVisibleFragment() is ShopsFragment||getVisibleFragment() is FragmentMyOrders){
                 activityMainBinding.bottomNavigationView.selectedItemId = R.id.settingsMenu
             }else {
                 onBackStackChanged()
             }
         }
         activityMainBinding.menuIcon.setOnClickListener {
-            replaceFragment(NotificationFrag(),true,false)
+            replaceFragment(CartFrag(),true,false)
         }
     }
 
@@ -75,7 +79,7 @@ class MainActivity : BaseActivity() {
                     true
                 }
                 R.id.mycartMenu ->{
-                    replaceFragment(CartFrag(), true, false)
+                    replaceFragment(NotificationFrag(), true, false)
                     true
                 }
                 R.id.settingsMenu ->{
@@ -86,25 +90,34 @@ class MainActivity : BaseActivity() {
             }
         }
     }
+
     override fun onBackPressed() {
       //  super.onBackPressed()
         onBackStackChanged()
     }
+
     private fun getVisibleFragment(): Fragment {
         return supportFragmentManager.findFragmentById(R.id.mainContainer)!!
     }
+
     fun onBackStackChanged() {
         val localFragmentManager = supportFragmentManager
         val i = localFragmentManager.backStackEntryCount
+
+        if (getVisibleFragment() is ShopsFragment) {
+            dialogExitApp()
+            return
+        }
             if (getVisibleFragment() is ShopsFragment||getVisibleFragment() is PhoneVerifyFragment ){
                 finish()
-        } else if (getVisibleFragment() is FragmentMyOrders|| getVisibleFragment() is CartFrag||getVisibleFragment() is SettingFrag){
+        } else if (getVisibleFragment() is FragmentMyOrders|| getVisibleFragment() is NotificationFrag||getVisibleFragment() is SettingFrag){
                 activityMainBinding.bottomNavigationView.selectedItemId = R.id.homeMenu
 
         } else {
                 localFragmentManager.popBackStack()
             }
    }
+
     fun showSnackBar(string: String) {
         try {
             val snackBar: Snackbar = Snackbar.make(findViewById(android.R.id.content), string, Snackbar.LENGTH_SHORT)
@@ -114,5 +127,21 @@ class MainActivity : BaseActivity() {
         }
         catch (e: java.lang.Exception) {
         }
+    }
+
+    fun dialogExitApp() {
+        AlertDialog.Builder(this)
+            .setMessage(R.string.exit_app)
+            .setPositiveButton("Yes")
+            { dialogInterface, which ->
+                if (getVisibleFragment() is ShopsFragment) {
+                    finish()
+                }
+            }.setNegativeButton(
+                "No"
+            ) { p0, p1 -> p0?.dismiss() }.create().show()
+    }
+    fun myOrder(){
+        activityMainBinding.bottomNavigationView.selectedItemId = R.id.myorderMenu
     }
 }

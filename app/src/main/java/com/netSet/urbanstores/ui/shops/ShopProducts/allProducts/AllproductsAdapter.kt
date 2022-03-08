@@ -1,5 +1,6 @@
 package com.netSet.urbanstores.ui.shops.ShopProducts.allProducts
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +18,8 @@ class AllproductsAdapter(
     val shopProductsList: ArrayList<ShopProductsList>,
     val baseActivity: BaseActivity
 ) : RecyclerView.Adapter<AllproductsAdapter.viewHolder>(){
+
+    var clickedPos = -1
 
     var quantityList = arrayListOf("1 Pcs","2 Pcs","3 Pcs","4 Pcs","5 Pcs","6 Pcs","7 Pcs","8 Pcs","9 Pcs","10 Pcs")
 
@@ -43,15 +46,15 @@ class AllproductsAdapter(
         adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
         holder.binding.quantitys.adapter = adapter
 
-        holder.proName.text = shopProductsList.get(position).productname
+        holder.binding.productName.text = shopProductsList.get(position).productname
         holder.proPrice.text = "Rs " + shopProductsList.get(position).productPrice.toString()
         holder.proDiscount.text = "Rs "+shopProductsList.get(position).discount
         if (shopProductsList.get(position).discount.equals(0)){
-            holder?.binding?.discountTxt?.visibility = View.GONE
+            holder.binding.discountTxt.visibility = View.GONE
         }else{
             holder.discount.text = shopProductsList.get(position).discount.toString()+"%\noff"
         }
-        holder.noPcs.setSelection(shopProductsList.get(position).productPcs)
+//        holder.noPcs.setSelection(shopProductsList.get(position).productPcs)
         holder.binding.productImg.setImageResource(shopProductsList.get(position).productImg)
 
         if (shopProductsList.get(position).isAddedToCart){
@@ -69,6 +72,18 @@ class AllproductsAdapter(
         holder.removeBtn.setOnClickListener {
             allProductsFrag.removefromcart(shopProductsList.get(position).id)
         }
+
+        holder.noPcs.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                val selection = p0?.getItemAtPosition(p2)
+//                baseActivity.shopProductsList.get(p2).productPcs = selection.toString()
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {}
+
+        }
+
+//        holder.noPcs.getSelectedItemPosition();
     }
 
     override fun getItemCount(): Int {

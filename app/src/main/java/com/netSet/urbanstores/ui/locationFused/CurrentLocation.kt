@@ -76,12 +76,9 @@ class CurrentLocation : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+     counterGone()
         isAppRunning=true
         onClick()
-        (activity as MainActivity).activityMainBinding.profileImg.setOnClickListener {
-            mainActivity?.onBackPressed()
-        }
         setToolBar(R.mipmap.back_48x48,"Choose Delivery Location",0)
         hideBottomNavigation()
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
@@ -91,7 +88,7 @@ class CurrentLocation : BaseFragment() {
         val mapFragment = childFragmentManager.findFragmentById(R.id.mapCurrent) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
 
-        bindingMap.btnUserCurrentLocation.setOnClickListener {
+        bindingMap.linearCurrentLocation.setOnClickListener {
             val coordinate = LatLng(latitudeTextView!!.toDouble(), longitTextView!!.toDouble())
             val yourLocation = CameraUpdateFactory.newLatLngZoom(coordinate, 5f)
             mMap.animateCamera(yourLocation)

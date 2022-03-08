@@ -9,7 +9,9 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.provider.Settings
-import android.text.*
+import android.text.Editable
+import android.text.TextUtils
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,7 +33,7 @@ import java.io.File
 import java.io.FileOutputStream
 import java.util.*
 
-class UpdateProfileFragment : BaseFragment() {
+class UpdateProfileFragment : BaseFragment(), TextWatcher {
     private var isAppRunning = false
     var imageBitmap: Bitmap? = null
     var imgPaths: File? = null
@@ -52,9 +54,17 @@ class UpdateProfileFragment : BaseFragment() {
         setToolBar(R.mipmap.back_48x48,"EDIT PROFILE",0)
         isAppRunning = true
         onClick()
-        initUi()
+        counterGone()
+//        initUi()
+        textWatchersValidation()
         hideBottomNavigation()
         sharePreferenceStoreNumber()
+    }
+
+    private fun textWatchersValidation() {
+        updateProfileBinding.etNameUser.addTextChangedListener(this)
+        updateProfileBinding.etEmail.addTextChangedListener(this)
+        updateProfileBinding.etAddress.addTextChangedListener(this)
     }
 
     private fun sharePreferenceStoreNumber() {
@@ -78,15 +88,12 @@ class UpdateProfileFragment : BaseFragment() {
                 return@setOnClickListener
             }*/
             if (validation()) {
-                (activity as MainActivity).replaceFragment(SettingFrag(), false, false,)
+                (activity as MainActivity).replaceFragment(SettingFrag(), false, false)
             }
         }
     }
 
-    private fun initUi() {
-        updateProfileBinding.etNameUser.filters = Validation.getEmojiFilter("'\"\\//\\", requireActivity())
-        updateProfileBinding.etEmail.filters = Validation.getEmojiFilter("'\"\\//\\", requireActivity())
-        updateProfileBinding.etAddress.filters = Validation.getEmojiFilter("'\"\\//\\", requireActivity())
+/*    private fun initUi() {
 
         updateProfileBinding.etNameUser.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -109,7 +116,7 @@ class UpdateProfileFragment : BaseFragment() {
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 val str: String = p0.toString()
-                if (str.length > 0 && str.contains(" ")) {
+                if (updateProfileBinding.etAddress.getText().toString().startsWith(" ")){
                   //  (activity as MainActivity).showSnackBar("Space are not allowed")
                     updateProfileBinding.etEmail.setText("")
                 }
@@ -133,7 +140,7 @@ class UpdateProfileFragment : BaseFragment() {
             override fun afterTextChanged(p0: Editable?) {
             }
         })
-    }
+    }*/
 
     override fun onDestroy() {
         super.onDestroy()
@@ -144,19 +151,21 @@ class UpdateProfileFragment : BaseFragment() {
 
         if (updateProfileBinding.etNameUser.text.toString().trim().isNullOrEmpty()) {
             updateProfileBinding.etNameUser.requestFocus()
-           updateProfileBinding.etNameUser.error="Name Can't Empty"
+           updateProfileBinding.etNameUser.error="Name can't be Empty."
             return false
         }
 
         if (TextUtils.isEmpty(updateProfileBinding.etEmail.text.toString()) || !Validation.isValidEmail(
                 updateProfileBinding.etEmail.text.toString())) {
             updateProfileBinding.etEmail.requestFocus()
-            updateProfileBinding.etEmail.error="Enter correct email address"
+            updateProfileBinding.etEmail.error="Email can't be Empty."
             return false
         }
+
+
         if (updateProfileBinding.etAddress.text.toString().trim().isNullOrEmpty()) {
             updateProfileBinding.etAddress.requestFocus()
-            updateProfileBinding.etEmail.error="Address Can't empty"
+            updateProfileBinding.etEmail.error="Address can't be empty."
             return false
         }
         return true
@@ -230,8 +239,7 @@ class UpdateProfileFragment : BaseFragment() {
             .withPermissions(
                 Manifest.permission.CAMERA,
                 Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.READ_CONTACTS
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
             )
             .withListener(object : MultiplePermissionsListener {
                 override fun onPermissionsChecked(multiplePermissionsReport: MultiplePermissionsReport) {
@@ -275,6 +283,32 @@ class UpdateProfileFragment : BaseFragment() {
             dialog.cancel()
         }
         builder.show()
+    }
+
+    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+    }
+
+    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+    override fun afterTextChanged(p0: Editable?) {
+
+        updateProfileBinding.etNameUser.filters = Validation.getEmojiFilter("'\"\\//\\", requireActivity())
+        updateProfileBinding.etEmail.filters = Validation.getEmojiFilter("'\"\\//\\", requireActivity())
+        updateProfileBinding.etAddress.filters = Validation.getEmojiFilter("'\"\\//\\", requireActivity())
+
+        if (updateProfileBinding.etNameUser.getText().toString().startsWith(" "))
+            updateProfileBinding.etNameUser.setText("")
+
+        val result: String = p0.toString().replace(" ".toRegex(), "")
+
+        if (p0.toString() != result) {
+            updateProfileBinding.etEmail.setText(result)
+            updateProfileBinding.etEmail.setSelection(result.length)
+        }
+        if (updateProfileBinding.etAddress.getText().toString().startsWith(" "))
+            updateProfileBinding.etAddress.setText("" )
+
     }
 
 }

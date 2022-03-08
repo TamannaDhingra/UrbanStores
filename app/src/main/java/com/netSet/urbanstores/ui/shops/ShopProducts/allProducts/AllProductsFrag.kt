@@ -56,6 +56,7 @@ class AllProductsFrag() : BaseFragment() {
         for(i in 0 until getBaseActivity().shopProductsList.size) {
             if (productId == getBaseActivity().shopProductsList[i].id){
                 getBaseActivity().shopProductsList.get(i).isAddedToCart = true
+                getBaseActivity().itemCounts ++
                 adapter?.notifyDataSetChanged()
             }
         }
@@ -65,6 +66,7 @@ class AllProductsFrag() : BaseFragment() {
         for(i in 0 until getBaseActivity().shopProductsList.size) {
             if (productId == getBaseActivity().shopProductsList[i].id){
                 getBaseActivity().shopProductsList.get(i).isAddedToCart = false
+                getBaseActivity().itemCounts --
                 adapter?.notifyDataSetChanged()
             }
         }

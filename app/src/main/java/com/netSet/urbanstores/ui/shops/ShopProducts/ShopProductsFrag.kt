@@ -2,6 +2,8 @@ package com.netSet.urbanstores.ui.shops.ShopProducts
 
 import ShopDiscountsAdapters
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +14,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.netSet.urbanstores.R
+import com.netSet.urbanstores.activities.MainActivity
 import com.netSet.urbanstores.base.BaseFragment
 import com.netSet.urbanstores.databinding.FragmentShopProductsBinding
 import com.netSet.urbanstores.ui.shops.ShopProducts.allProducts.AllProductsFrag
@@ -35,6 +38,23 @@ class ShopProductsFrag : BaseFragment(), TabLayout.OnTabSelectedListener {
         super.onViewCreated(view, savedInstanceState)
 
         discountsAdapterCall()
+        hideBottomNavigation()
+        counterVisible()
+        searchTxtWatcher()
+
+        setToolBar(R.mipmap.back_48x48,"SHOP NAME",R.mipmap.cart_3x)
+    }
+
+    private fun searchTxtWatcher() {
+            binding?.searchProducts?.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+                override fun afterTextChanged(p0: Editable?) {
+                    if (binding?.searchProducts?.getText().toString().startsWith(" "))
+                        binding?.searchProducts?.setText("") }
+            })
     }
 
     private fun setupViewPager() {
@@ -45,6 +65,8 @@ class ShopProductsFrag : BaseFragment(), TabLayout.OnTabSelectedListener {
         productsTabAdapter?.addFragment(AllProductsFrag())
         productsTabAdapter?.addFragment(AllProductsFrag())
         binding?.productsViewPager?.adapter = productsTabAdapter
+
+        binding?.productsViewPager?.setSaveEnabled(false)
 
         binding?.productsViewPager?.clipToPadding = false
         binding?.productsViewPager?.clipChildren = false

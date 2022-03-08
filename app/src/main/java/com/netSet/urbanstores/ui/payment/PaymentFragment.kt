@@ -35,14 +35,19 @@ lateinit var paymentBinding:FragmentPaymentBinding
         super.onViewCreated(view, savedInstanceState)
         setToolBar(R.mipmap.back_48x48,"MAKE PAYMENT",0)
         onClick()
-        (activity as MainActivity).activityMainBinding.profileImg.setOnClickListener{
-            mainActivity!!.onBackPressed()
-        }
+    }
+
+    private val congratsDialog by lazy {
+        CongratulationsDialogFragment()
     }
 
     private fun onClick() {
+
         paymentBinding.btnPaymentDone.setOnClickListener {
-            CongratulationsDialogFragment().show(requireFragmentManager(),"CongratulationDialog")
+            if (congratsDialog.isVisible){
+                return@setOnClickListener
+            }
+            congratsDialog.show(requireFragmentManager(),"CongratulationDialog")
         }
     }
 }

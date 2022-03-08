@@ -29,9 +29,10 @@ class FragmentMyOrders : BaseFragment() {
         arrayList.add(ModelClssMyOrders("1 X Banana-Yekali(12pcs),1X-Onion","4 june 2020 at 7:54 PM","Rs 170"))
         arrayList.add(ModelClssMyOrders("1 X Banana-Yekali(12pcs),1X-Onion","5 june 2021 at 7:54 PM","Rs 190"))
 
-        navigationBgVisiblity()
-        setToolBar(R.mipmap.profile,"MY ORDERS",R.mipmap.bell_3x)
+//        navigationBgVisiblity()
+        setToolBar(R.mipmap.profile,"MY ORDERS",R.mipmap.cart_3x)
         showBottomNavigation()
+        counterVisible()
      /*   (activity as MainActivity).activityMainBinding.profileImg.setOnClickListener {
             (activity as MainActivity).replaceFragment(SettingFrag(),true,false)
         }*/

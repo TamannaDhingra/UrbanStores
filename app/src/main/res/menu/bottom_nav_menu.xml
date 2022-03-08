@@ -15,9 +15,9 @@
 
     <item
         android:id="@+id/mycartMenu"
-        android:title="MY CART"
+        android:title="NOTIFICATIONS"
         app:showAsAction="ifRoom"
-        android:icon="@mipmap/cart_3x"/>
+        android:icon="@mipmap/bell_3x"/>
 
     <item
         android:id="@+id/settingsMenu"

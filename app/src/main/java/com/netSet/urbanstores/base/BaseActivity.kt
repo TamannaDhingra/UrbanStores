@@ -19,11 +19,10 @@ open class BaseActivity : AppCompatActivity() {
     var currentFragment : Fragment?= null
     var fragmentTransaction : FragmentTransaction?= null
     var adapter : AllproductsAdapter?= null
-    var cartCallback : CartCallback ?=null
     var shopProductsList : ArrayList<ShopProductsList> = ArrayList()
-    var productsList : ArrayList<AllProductsModel> = ArrayList()
     var cartTotalAmount : Int = 0
     var tabPosition : Int = 0
+    var itemCounts : Int = 0
     var totalDiscountAmount : Int = 0
 
     fun replaceFragment(mFragment: Fragment, isBack: Boolean, allowAnim: Boolean){
@@ -60,18 +59,12 @@ open class BaseActivity : AppCompatActivity() {
         }
         return super.dispatchTouchEvent(ev)
     }
-    fun addProducts() {
-        productsList.add(AllProductsModel(1,R.mipmap.img_3,"Potato",90,"50",false,"Vegetables",0))
-        productsList.add(AllProductsModel(2,R.mipmap.img_4,"Apple",80,"10",false,"Fruits",0))
-        productsList.add(AllProductsModel(3,R.mipmap.img_3,"Tomato",40,"40",false,"Vegetables",0))
-        productsList.add(AllProductsModel(4,R.mipmap.img_4,"Mango",80,"50",false,"Fruits",0))
-        productsList.add(AllProductsModel(5,R.mipmap.img_4,"Grapes",70,"70",false,"Fruits",0))
-    }
+
     fun allProductsLists(){
-        shopProductsList.add(ShopProductsList(1,R.mipmap.img_4,"Banana - Yelakki",90,10,false,"Fruits",0))
-        shopProductsList.add(ShopProductsList(2,R.mipmap.img_3,"Fresh Onion",40,10,false,"Vegetables",0))
-        shopProductsList.add(ShopProductsList(3,R.mipmap.img_2,"Green Salad Package",150,0,false,"Packages",0))
-        shopProductsList.add(ShopProductsList(4,R.mipmap.img_4,"Potato",90,20,false,"Vegetables",0))
+        shopProductsList.add(ShopProductsList(1,R.mipmap.img_4,"Banana - Yelakki",90,10,false,"Fruits",""))
+        shopProductsList.add(ShopProductsList(2,R.mipmap.img_3,"Fresh Onion",40,10,false,"Vegetables",""))
+        shopProductsList.add(ShopProductsList(3,R.mipmap.img_2,"Green Salad Package",150,0,false,"Packages",""))
+        shopProductsList.add(ShopProductsList(4,R.mipmap.img_4,"Potato",90,20,false,"Vegetables",""))
     }
     fun clearBackStack(){
        val count = supportFragmentManager.backStackEntryCount

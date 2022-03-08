@@ -39,6 +39,7 @@ class VerificationFragment : BaseFragment() {
         hideBottomNavigation()
         isAppRunning=true
         setInitialData()
+        counterGone()
         setBackGroundRecursive()
        /* (activity as MainActivity).activityMainBinding.profileImg.setOnClickListener {
             mainActivity?.onBackPressed()

@@ -16,7 +16,9 @@ import android.location.LocationManager
 import android.os.Bundle
 import android.os.Looper
 import android.provider.Settings
+import android.text.Editable
 import android.text.Html
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -56,8 +58,14 @@ class ShopsFragment : BaseFragment() {
         val appPrefs = AppPref(requireActivity())
 
         binding?.expendTxt?.setOnClickListener {
-            binding?.currentLocation?.maxLines = 3
+            if (binding?.currentLocation?.lineCount ==1){
+                binding?.currentLocation?.maxLines = 3
+            }else{
+                binding?.currentLocation?.maxLines = 1
+            }
         }
+
+        searchTxtWatcher()
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         if (appPrefs.getValue("location")!=""){
@@ -85,9 +93,23 @@ class ShopsFragment : BaseFragment() {
 
         shopListAdapter()
         showBottomNavigation()
-        navigationBgVisiblity()
-        setToolBar(R.mipmap.profile,"HOME",R.mipmap.bell_3x)
+//        navigationBgVisiblity()
+        counterVisible()
+        setToolBar(R.mipmap.profile,"HOME",R.mipmap.cart_3x)
     }
+
+    private fun searchTxtWatcher() {
+        binding?.searchProducts?.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+            override fun afterTextChanged(p0: Editable?) {
+                if (binding?.searchProducts?.getText().toString().startsWith(" "))
+                    binding?.searchProducts?.setText("") }
+        })
+    }
+
     private fun shopListAdapter() {
         adapter = ShopListsAdapter(this)
         val manager = LinearLayoutManager(context)

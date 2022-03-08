@@ -41,7 +41,7 @@
                     android:paddingStart="@dimen/_10sdp"
                     android:paddingEnd="@dimen/_10sdp"
                     android:inputType="number"
-                    android:maxLength="15"
+                    android:maxLength="13"
                     android:paddingBottom="@dimen/_4sdp"
                     android:singleLine="true"
                     android:textSize="@dimen/_14sdp"

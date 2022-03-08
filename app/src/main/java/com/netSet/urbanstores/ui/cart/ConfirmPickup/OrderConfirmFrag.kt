@@ -29,13 +29,14 @@ class OrderConfirmFrag : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         adapterCall()
-        navigationBgVisiblity()
+//        navigationBgVisiblity()
         hideBottomNavigation()
 //        getTotalAmntUsingBundle()
 //        grandTotalAmnt()
         initUI()
         setToolBar(R.mipmap.back_48x48,"CONFIRM",0)
     }
+
 
     private fun initUI() {
         binding?.tvChangeOrderAddress?.setOnClickListener {
@@ -66,7 +67,7 @@ class OrderConfirmFrag : BaseFragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        showBottomNavigation()
+        hideBottomNavigation()
     }
 
     private fun adapterCall() {

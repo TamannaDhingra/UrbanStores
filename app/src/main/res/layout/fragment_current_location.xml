@@ -98,22 +98,33 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnUserCurrentLocation"
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/linearCurrentLocation"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/_22sdp"
-            android:background="@drawable/bg_button_location"
-            android:drawableStart="@drawable/resize_pic"
-            android:drawablePadding="@dimen/_4sdp"
-            android:fontFamily="@font/sofiapromedium"
-            android:paddingStart="@dimen/_4sdp"
-            android:paddingEnd="@dimen/_6sdp"
-            android:text="use current location"
-            android:textAllCaps="false"
-            android:layout_marginBottom="@dimen/_10sdp"
-            android:textColor="@color/appbar_bg"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/_4sdp"
+            android:layout_margin="@dimen/_10sdp"
             app:layout_constraintBottom_toBottomOf="@+id/mapCurrent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            android:background="@drawable/bg_button_location"
+            app:layout_constraintStart_toStartOf="parent">
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/_12sdp"
+                android:layout_height="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/resize_pic"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="use current location"
+                android:fontFamily="@font/sofiapromedium"
+                android:layout_marginStart="@dimen/_2sdp"
+                android:layout_gravity="center_vertical"
+                android:textSize="@dimen/_10sdp"
+                android:textColor="@color/appbar_bg"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

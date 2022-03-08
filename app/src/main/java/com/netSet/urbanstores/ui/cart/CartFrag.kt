@@ -25,9 +25,9 @@ class CartFrag : BaseFragment() {
     var vegeList : List<ShopProductsList> ? = null
     var packageList : List<ShopProductsList> ? = null
 
-    val ISFRUIT = 1
+/*    val ISFRUIT = 1
     val ISVEGETABLE = 2
-    val ISPACKAGE = 3
+    val ISPACKAGE = 3*/
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -44,19 +44,17 @@ class CartFrag : BaseFragment() {
         fruitsAdapter()
         vegitablesAdapter()
         packageAdapter()
-        navigationBgVisiblity()
         checkoutBtnListner()
+        hideBottomNavigation()
+        counterGone()
         ifListEmptyCode()
-        setToolBar(R.mipmap.profile,"MY CART",R.mipmap.bell_3x)
-        (activity as MainActivity).activityMainBinding.bottomGreenBg.visibility = View.VISIBLE
-        Log.e("myData",getBaseActivity().cartTotalAmount.toString())
+        setToolBar(R.mipmap.back_48x48,"MY CART",0)
+//        (activity as MainActivity).activityMainBinding.bottomGreenBg.visibility = View.VISIBLE
     }
 
     private fun ifListEmptyCode() {
         if (fruitsList?.isEmpty()!!&&vegeList?.isEmpty()!! && packageList?.isEmpty()!!){
-            binding?.fruitsConstraint?.visibility = View.GONE
-            binding?.vegitablesConstraint?.visibility = View.GONE
-            binding?.packageConstraint?.visibility = View.GONE
+            binding?.vegitablesConstraint?.visibility= View.GONE
             binding?.noDataFoundTxt?.visibility = View.VISIBLE
         }else if (fruitsList?.isEmpty()!!){
             binding?.fruitsConstraint?.visibility = View.GONE
@@ -64,6 +62,18 @@ class CartFrag : BaseFragment() {
             binding?.vegitablesConstraint?.visibility = View.GONE
         }else if (packageList?.isEmpty()!!){
             binding?.packageConstraint?.visibility = View.GONE
+        }
+
+        if (packageList?.isEmpty()!!){
+            binding?.packageConstraint?.visibility = View.GONE
+        }
+
+        if (vegeList?.isEmpty()!!){
+            binding?.vegitablesConstraint?.visibility = View.GONE
+        }
+
+        if (fruitsList?.isEmpty()!!){
+            binding?.fruitsConstraint?.visibility = View.GONE
         }
     }
 
@@ -88,8 +98,7 @@ class CartFrag : BaseFragment() {
         binding?.packageRecyclerview?.layoutManager = layoutManager
         binding?.packageRecyclerview?.adapter = packageAdapter
 
-        binding?.packageCount?.text = vegeList?.size.toString() +" item"
-
+        binding?.packageCount?.text = vegeList?.size.toString() +" Item"
     }
 
     private fun vegitablesAdapter() {
@@ -124,18 +133,39 @@ class CartFrag : BaseFragment() {
         binding?.fruitsCount?.text = fruitsList?.size.toString() +" Item"
     }
 
-    override fun onStop() {
+    fun removeItemWhenCartZero(position: Int) {
+        fruitsList?.get(position)?.isAddedToCart=false
+        fruitsAdapter()
+        ifListEmptyCode()
+        binding?.fruitsConstraint?.visibility= View.GONE
+    }
+
+    fun removeVegeItem(position: Int) {
+        vegeList?.get(position)?.isAddedToCart =false
+        vegitablesAdapter()
+        ifListEmptyCode()
+    }
+
+    fun removePackageItem(position: Int) {
+        packageList?.get(position)?.isAddedToCart =false
+        packageAdapter()
+        ifListEmptyCode()
+        binding?.packageConstraint?.visibility= View.GONE
+    }
+
+
+/*    override fun onStop() {
         super.onStop()
         getBaseActivity().cartTotalAmount = 0
         getBaseActivity().totalDiscountAmount = 0
-    }
+    }*/
 
-    fun setTotal() {
+/*    fun setTotal() {
         binding?.totalRupee?.text = "Rs "+getBaseActivity().cartTotalAmount.toString()
         binding?.savedRupee?.text = "Saved Rs "+getBaseActivity().totalDiscountAmount.toString()
-    }
+    }*/
 
-    fun increaseQuantitiy(position: Int, type: Int) {
+/*    fun increaseQuantitiy(position: Int, type: Int) {
         getBaseActivity().cartTotalAmount = 0
         when(type){
             ISFRUIT->{
@@ -165,7 +195,7 @@ class CartFrag : BaseFragment() {
         }
 
         fruitsAdapter?.notifyDataSetChanged()
-    }
+    }*/
 
 }
 

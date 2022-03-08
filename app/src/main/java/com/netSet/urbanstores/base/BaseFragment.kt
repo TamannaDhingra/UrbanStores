@@ -30,15 +30,23 @@ open class BaseFragment : Fragment() {
         return baseActivity!!
     }
 
+    fun counterVisible(){
+        mainActivity?.activityMainBinding?.countBadge?.visibility = View.VISIBLE
+    }
+
+    fun counterGone(){
+        mainActivity?.activityMainBinding?.countBadge?.visibility = View.GONE
+    }
+
     fun setToolBar(profileIcon : Int,title: String, menuIcon : Int){
         (activity as MainActivity).activityMainBinding.profileImg.setImageResource(profileIcon)
         (activity as MainActivity).activityMainBinding.title.text = title
         (activity as MainActivity).activityMainBinding.menuIcon.setImageResource(menuIcon)
     }
 
-    fun navigationBgVisiblity(){
+  /*  fun navigationBgVisiblity(){
         (activity as MainActivity).activityMainBinding?.bottomGreenBg?.visibility = View.GONE
-    }
+    }*/
 
     fun hideToolBar(){
         (activity as MainActivity).activityMainBinding?.toolBar?.visibility = View.GONE

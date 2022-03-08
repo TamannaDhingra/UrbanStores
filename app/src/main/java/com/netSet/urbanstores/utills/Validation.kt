@@ -28,6 +28,8 @@ object Validation {
     fun isValidPhone(text: String):Boolean{
         return Patterns.PHONE.matcher(text).matches()
     }
+
+
     //cant
     fun getEmojiFilter(blockChars: String, context: Context): Array<InputFilter> {
         return arrayOf(label@ InputFilter { source: CharSequence?, start: Int, end: Int, dest: Spanned?, dstart: Int, dend: Int ->

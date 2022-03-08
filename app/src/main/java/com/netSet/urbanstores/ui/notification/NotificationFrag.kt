@@ -29,8 +29,10 @@ class NotificationFrag : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         notificationAdapter()
-        navigationBgVisiblity()
-        setToolBar(R.mipmap.back_48x48,"NOTIFICATIONS",0)
+//        navigationBgVisiblity()
+        showBottomNavigation()
+        counterGone()
+        setToolBar(0,"NOTIFICATIONS",0)
    /*     (activity as MainActivity).activityMainBinding?.profileImg?.setOnClickListener {
             backStackCode()
         }*/

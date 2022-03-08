@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_14sdp"
                 android:fontFamily="@font/sofiaprosemibold"
-                android:text="Profile Setting"
+                android:text="Profile Settings"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12sdp"
                 app:layout_constraintBottom_toBottomOf="@+id/imageProfileSetting"

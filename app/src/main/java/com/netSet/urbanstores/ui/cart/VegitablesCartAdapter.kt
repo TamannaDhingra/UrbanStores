@@ -37,14 +37,15 @@ class VegitablesCartAdapter(
 
         //Cart Pieces Increment Listener
         holder.increaseI.setOnClickListener {
-            if (holder.items.text.toString().toInt()>0) {
                 holder.proPcs.setText("" + (Integer.parseInt(holder.items.getText().toString()) + 1) +" Pcs")
                 holder.items.setText("" + (Integer.parseInt(holder.items.getText().toString()) + 1))
-            }
         }
 
         //Cart Pieces Decrement Listener
         holder.decreaseI.setOnClickListener {
+            if (holder.items.text.toString().toInt()-1==0){
+                fragment.removeVegeItem(position)
+            }
             if (holder.items.text.toString().toInt()>0) {
                 holder.proPcs.setText("" + (Integer.parseInt(holder.items.getText().toString()) - 1) +" Pcs")
                 holder.items.setText("" + (Integer.parseInt(holder.items.getText().toString()) - 1))
@@ -60,18 +61,20 @@ class VegitablesCartAdapter(
         holder.proPcs.text = (vegeList.get(position).productPcs+1).toString() + " Pcs"
         holder.items.text = (vegeList.get(position).productPcs+1).toString()
 
+/*
         //Total Price Logic
         val totalFruitPrice = vegeList.get(position).productPrice.toString().toInt()
-        val totalFruitPcs = vegeList.get(position).productPcs.toString().toInt()+1
+        val totalFruitPcs = vegeList.get(position).productPcs.toString().toInt()
         val finalPrice = totalFruitPrice*totalFruitPcs
+*/
 
         //Discount Value Set in final
-        fragment.getBaseActivity().totalDiscountAmount = fragment.getBaseActivity().totalDiscountAmount+vegeList.get(position).discount.toInt()
-
+//        fragment.getBaseActivity().totalDiscountAmount = fragment.getBaseActivity().totalDiscountAmount+vegeList.get(position).discount.toInt()
+/*
         //Set Total Price
         fragment.getBaseActivity().cartTotalAmount += finalPrice
         Log.e("thefinalAmountIs", fragment.getBaseActivity().cartTotalAmount.toString())
-        fragment.setTotal()
+//        fragment.setTotal()*/
     }
 
     override fun getItemCount(): Int {

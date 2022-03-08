@@ -9,7 +9,7 @@
     <string name="rs_strikethrough_txt">Rs 100</string>
     <string name="add_button">ADD</string>
     <string name="change"><u>Change</u></string>
-    <string name="select_logout">Are you sure you want to exit the app</string>
+    <string name="select_logout">Are you sure you want to logout?</string>
 
     <string-array name="array_quantity">
         <item>1pcs</item>
@@ -30,11 +30,12 @@
 
     </string-array>
 
-=======
+
     <string name="resendOTP"><a href="">Resend OTP</a></string>
     <string name="addCard"><a href="">+Add New Card </a></string>
     <string name="you_order_has_been_placed_successfully">You Order has been placed successfully.</string>
     <string name="congratulations">Congratulations...</string>
     <string name="view_my_order">VIEW MY ORDER</string>
->>>>>>> Stashed changes
+    <string name="exit_app">Are you sure you want to exit the app?</string>
+
 </resources>

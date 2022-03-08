@@ -7,7 +7,7 @@
         android:layout_height="wrap_content"
         android:background="@color/white">
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/openProducts"
             android:layout_width="match_parent"
             android:layout_height="@dimen/card_view_height"
@@ -82,7 +82,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

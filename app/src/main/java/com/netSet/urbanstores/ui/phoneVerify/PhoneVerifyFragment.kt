@@ -1,10 +1,12 @@
 package com.netSet.urbanstores.ui.phoneVerify
 
+import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,6 +42,7 @@ lateinit var phoneBinding:FragmentPhoneVerifyBinding
 
         setToolBar(0,"PHONE NUMBER",0)
         hideBottomNavigation()
+        counterGone()
         isAppRunning=true
 
         initUI()
@@ -58,8 +61,9 @@ lateinit var phoneBinding:FragmentPhoneVerifyBinding
             bundle.putString("country", countryCode)
             verificationFragment.arguments=bundle
             (context as MainActivity).replaceFragment(verificationFragment, true, false)
-            Toast.makeText(requireActivity(),"OTP Successfully Send to Register Number",Toast.LENGTH_SHORT).show()
-            phoneBinding.etPhoneNumber.text?.clear()
+            val toast = Toast.makeText(requireContext().applicationContext, "OTP successfully sent to registered number.", Toast.LENGTH_SHORT)
+            toast.setGravity(Gravity.CENTER or Gravity.CENTER_HORIZONTAL, 0, 180)
+            toast.show()
         }
     }
 

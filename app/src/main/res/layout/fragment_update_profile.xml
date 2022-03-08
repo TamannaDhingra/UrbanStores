@@ -3,6 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+<androidx.core.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -50,6 +54,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             android:hint="Enter your name"
+            android:maxLength="30"
             android:imeOptions="actionNext"
             android:singleLine="true"
             android:inputType="textPersonName"
@@ -88,6 +93,17 @@
             android:textSize="@dimen/_10sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView6" />
+        <View
+            android:id="@+id/view3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:background="@color/viewColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvPhoneNumber" />
         <TextView
             android:id="@+id/textView7"
             android:layout_width="wrap_content"
@@ -99,9 +115,9 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:textSize="@dimen/_10sdp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvPhoneNumber" />
+            app:layout_constraintTop_toBottomOf="@+id/view3" />
 
-        <androidx.appcompat.widget.AppCompatEditText
+        <EditText
             android:id="@+id/etEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -109,7 +125,8 @@
             android:hint="test@yopmail.com"
             android:imeOptions="actionNext"
             android:singleLine="true"
-            android:inputType="textEmailAddress"
+            android:digits="abcdefghijklmnopqrstuvwxyz.@1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ_"
+            android:inputType="textFilter"
             android:textColorHint="@color/btn_text_clr"
             android:layout_marginStart="@dimen/_20sdp"
             android:layout_marginEnd="@dimen/_20sdp"
@@ -140,6 +157,7 @@
             android:imeOptions="actionDone"
             android:singleLine="true"
             android:inputType="text"
+            android:maxLength="100"
             android:textColorHint="@color/btn_text_clr"
             android:layout_marginStart="@dimen/_20sdp"
             android:layout_marginEnd="@dimen/_20sdp"
@@ -168,4 +186,5 @@
             app:layout_constraintTop_toBottomOf="@+id/etAddress" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
 </layout>

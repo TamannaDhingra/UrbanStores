@@ -27,8 +27,6 @@ class SettingFrag : BaseFragment() {
     ): View? {
         settingBinding= DataBindingUtil.inflate(inflater,R.layout.fragment_setting, container, false)
         return settingBinding.root
-
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -36,9 +34,10 @@ class SettingFrag : BaseFragment() {
 
         setToolBar(0,"SETTINGS",0)
         showBottomNavigation()
-        navigationBgVisiblity()
+//        navigationBgVisiblity()
 
         onClick()
+        counterGone()
         sharePreferenceStoreNumber()
     }
 

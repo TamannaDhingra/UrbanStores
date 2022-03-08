@@ -25,6 +25,7 @@ class FruitsCartAdapter(
         val proPrice = binding.productAmount
         val proDiscount = binding.productDiscount
         val proPcs = binding.quantitys
+        val fruitImg = binding.productImg
         val productDiscount = binding.discountTxt
     }
 
@@ -35,18 +36,21 @@ class FruitsCartAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+
         //Cart Pieces Increment Listener
         holder.increaseI.setOnClickListener {
-            if (holder.items.text.toString().toInt()>0){
                 holder.proPcs.setText(""+(Integer.parseInt(holder.items.getText().toString()) + 1) +" Pcs")
                 holder.items.setText(""+(Integer.parseInt(holder.items.getText().toString()) + 1))
-            }
         }
 
         //Cart Pieces Decrement Listener
         holder.decreaseI.setOnClickListener {
-            if (holder.items.text.toString().toInt() > 0) {
-                holder.proPcs.setText(""+(Integer.parseInt(holder.items.getText().toString()) - 1) +" Pcs")
+
+            if (holder.items.text.toString().toInt()-1==0){
+                fragment.removeItemWhenCartZero(position)
+
+            }else if (holder.items.text.toString().toInt()>0){
+                holder.proPcs.setText("" + (Integer.parseInt(holder.items.getText().toString()) - 1) + " Pcs")
                 holder.items.setText("" + (Integer.parseInt(holder.items.getText().toString()) - 1))
             }
         }
@@ -54,27 +58,26 @@ class FruitsCartAdapter(
         //values  Initialization
         if (productsList?.get(position)?.isAddedToCart!! && productsList?.get(position)?.productCategory.equals("Fruits")){
             holder.proName.text = productsList?.get(position)?.productname
-            holder.proPrice.text = "Rs "+productsList?.get(position)?.productPrice.toString()
+            holder.proPrice.text =  "Rs "+productsList?.get(position)?.productPrice.toString()
             holder.proDiscount.text = "Rs "+productsList?.get(position)?.productPrice.toString()
-            holder.productDiscount.text = productsList?.get(position)?.discount.toString()
-            holder.proPcs.text = productsList?.get(position)?.productPcs.toString()
-            holder.items.text = (productsList?.get(position)?.productPcs).toString()
+            holder.fruitImg.setImageResource(productsList?.get(position)?.productImg!!)
             holder.productDiscount.text = productsList?.get(position)?.discount.toString()+"%\noff"
-            holder.proPcs.text = (productsList?.get(position)?.productPcs).toString() + " Pcs"
+            holder.proPcs.text = (productsList?.get(position)?.productPcs+1).toString() + " Pcs"
+            holder.items.text = (productsList?.get(position)?.productPcs+1).toString()
         }
 
-        //Total Price Logic
+/*        //Total Price Logic
         val totalFruitPrice = productsList?.get(position)?.productPrice.toString().toInt()
         val totalFruitPcs = productsList?.get(position)?.productPcs.toString().toInt()+1
-        val finalPrice = totalFruitPrice*totalFruitPcs
+        val finalPrice = totalFruitPrice*totalFruitPcs*/
 
         //Discount Value Set in final
-        fragment.getBaseActivity().totalDiscountAmount = fragment.getBaseActivity().totalDiscountAmount+ productsList?.get(position)?.discount?.toInt()!!
+//        fragment.getBaseActivity().totalDiscountAmount = fragment.getBaseActivity().totalDiscountAmount+ productsList?.get(position)?.discount?.toInt()!!
 
         //Set Total Price
-        fragment.getBaseActivity().cartTotalAmount =  fragment.getBaseActivity().cartTotalAmount + finalPrice
+     /*   fragment.getBaseActivity().cartTotalAmount =  fragment.getBaseActivity().cartTotalAmount + finalPrice
         Log.e("thefinalAmountIs", fragment.getBaseActivity().cartTotalAmount.toString())
-        fragment.setTotal()
+        fragment.setTotal()*/
     }
 
     override fun getItemCount(): Int {

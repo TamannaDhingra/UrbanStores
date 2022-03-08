@@ -70,7 +70,7 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardView"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_200sdp"
+                    android:layout_height="@dimen/_255sdp"
                     android:layout_marginHorizontal="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_20sdp"
                     app:cardCornerRadius="@dimen/card_corner_radius"
@@ -82,7 +82,7 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_200sdp"
+                        android:layout_height="@dimen/_255sdp"
                         app:cardCornerRadius="@dimen/card_corner_radius"
                         app:cardElevation="@dimen/card_elevation">
 
@@ -90,7 +90,8 @@
                             android:id="@+id/tv_items"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/tv_margin"
+                            android:layout_marginStart="@dimen/_20sdp"
+                            android:layout_marginTop="@dimen/_15sdp"
                             android:fontFamily="@font/sofiapro_light"
                             android:text="ITEMS"
                             android:textSize="@dimen/heading_text_size"
@@ -98,15 +99,17 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
 
-                        <TextView
-                            android:id="@+id/tv_item_detalis"
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_item_details"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            tools:itemCount="4"
+                            android:nestedScrollingEnabled="false"
+                            tools:listitem="@layout/inflater_items_details"
                             android:layout_marginStart="@dimen/tv_margin_start"
                             android:layout_marginTop="@dimen/tv_margin_top"
                             android:layout_marginEnd="@dimen/tv_margin_start"
                             android:fontFamily="@font/sofiapromedium"
-                            android:text="1 X Banana - Yekali (12 pcs),1 X Onion 1 Kg"
                             android:textColor="@color/black"
                             android:textSize="@dimen/details_text_size"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -124,7 +127,7 @@
                             android:text="ORDERED ON"
                             android:textSize="@dimen/heading_text_size"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/tv_item_detalis" />
+                            app:layout_constraintTop_toBottomOf="@+id/rv_item_details" />
 
                         <TextView
                             android:id="@+id/order_on_details"
@@ -240,43 +243,43 @@
                     tools:listitem="@layout/inflater_track_order" />
 
 
-                <TextView
-                    android:id="@+id/textView7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/start_margin_order_details"
-                    android:layout_marginTop="@dimen/_15sdp"
-                    android:fontFamily="@font/sofiaprosemibold"
-                    android:text="View On Map"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_13sdp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/rv_track_order" />
+                <!-- <TextView
+                     android:id="@+id/textView7"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_marginStart="@dimen/start_margin_order_details"
+                     android:layout_marginTop="@dimen/_15sdp"
+                     android:fontFamily="@font/sofiaprosemibold"
+                     android:text="View On Map"
+                     android:textColor="@color/black"
+                     android:textSize="@dimen/_13sdp"
+                     app:layout_constraintStart_toStartOf="parent"
+                     app:layout_constraintTop_toBottomOf="@+id/rv_track_order" />
 
 
-                <TextView
-                    android:id="@+id/textView14"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                 <TextView
+                     android:id="@+id/textView14"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
 
-                    android:layout_marginTop="@dimen/_16sdp"
-                    android:layout_marginRight="@dimen/_10sdp"
-                    android:fontFamily="@font/sofiaprosemibold"
-                    android:text="Contact Us"
-                    android:textColor="@color/green_bg"
-                    android:textSize="@dimen/_11sdp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/rv_track_order" />
+                     android:layout_marginTop="@dimen/_16sdp"
+                     android:layout_marginRight="@dimen/_10sdp"
+                     android:fontFamily="@font/sofiaprosemibold"
+                     android:text="Contact Us"
+                     android:textColor="@color/green_bg"
+                     android:textSize="@dimen/_11sdp"
+                     app:layout_constraintEnd_toEndOf="parent"
+                     app:layout_constraintTop_toBottomOf="@+id/rv_track_order" />
 
 
-                <View
-                    android:id="@+id/view2"
-                    android:layout_width="@dimen/_53sdp"
-                    android:layout_height="@dimen/_1sdp"
-                    android:background="@color/green_bg"
-                    app:layout_constraintEnd_toEndOf="@+id/textView14"
-                    app:layout_constraintTop_toBottomOf="@+id/textView14" />
-                <com.netSet.urbanstores.ui.maps.CustomScrollView
+                 <View
+                     android:id="@+id/view2"
+                     android:layout_width="@dimen/_53sdp"
+                     android:layout_height="@dimen/_1sdp"
+                     android:background="@color/green_bg"
+                     app:layout_constraintEnd_toEndOf="@+id/textView14"
+                     app:layout_constraintTop_toBottomOf="@+id/textView14" />-->
+                <!--<com.netSet.urbanstores.ui.maps.CustomScrollView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
@@ -304,7 +307,7 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </com.netSet.urbanstores.ui.maps.CustomScrollView>
-
+-->
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.core.widget.NestedScrollView>
