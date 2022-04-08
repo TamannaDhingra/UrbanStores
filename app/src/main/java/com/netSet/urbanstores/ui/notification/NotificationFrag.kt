@@ -1,16 +1,15 @@
 package com.netSet.urbanstores.ui.notification
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.netSet.urbanstores.R
-import com.netSet.urbanstores.activities.MainActivity
 import com.netSet.urbanstores.base.BaseFragment
 import com.netSet.urbanstores.databinding.FragmentNotificationBinding
+import com.netSet.urbanstores.sharePreference.AppPref
 
 class NotificationFrag : BaseFragment() {
 
@@ -32,7 +31,7 @@ class NotificationFrag : BaseFragment() {
 //        navigationBgVisiblity()
         showBottomNavigation()
         counterGone()
-        setToolBar(0,"NOTIFICATIONS",0)
+        setToolBar("none","NOTIFICATIONS",0)
    /*     (activity as MainActivity).activityMainBinding?.profileImg?.setOnClickListener {
             backStackCode()
         }*/
@@ -40,7 +39,7 @@ class NotificationFrag : BaseFragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        setToolBar(R.mipmap.profile_3x,"HOME", R.mipmap.bell_3x)
+        setToolBar(AppPref(requireContext()).getUserImage(),"HOME", R.mipmap.bell_3x)
     }
 
     private fun notificationAdapter() {

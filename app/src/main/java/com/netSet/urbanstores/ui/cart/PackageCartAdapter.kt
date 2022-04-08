@@ -29,7 +29,7 @@ class PackageCartAdapter(var fragment: CartFrag,var packageList: List<ShopProduc
         }
 
         //Cart Pieces Decrement Listener
-        holder.decreaseI.setOnClickListener {
+       /* holder.decreaseI.setOnClickListener {
             if (holder.items.text.toString().toInt()-1==0){
                 fragment.removePackageItem(position)
             }
@@ -37,7 +37,7 @@ class PackageCartAdapter(var fragment: CartFrag,var packageList: List<ShopProduc
                 holder.proPcs.setText("" + (Integer.parseInt(holder.items.getText().toString()) - 1) +" Pcs")
                 holder.items.setText("" + (Integer.parseInt(holder.items.getText().toString()) - 1))
             }
-        }
+        }*/
 
         //values  Initialization
         holder.proName.text = packageList.get(position).productname

@@ -17,6 +17,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
@@ -26,6 +27,9 @@ import com.netSet.urbanstores.R
 import com.netSet.urbanstores.activities.MainActivity
 import com.netSet.urbanstores.base.BaseFragment
 import com.netSet.urbanstores.databinding.FragmentUpdateProfileBinding
+import com.netSet.urbanstores.network.RetroBuilder
+import com.netSet.urbanstores.network.viewmodel.MainViewModel
+import com.netSet.urbanstores.network.viewmodel.MainViewModelFactory
 import com.netSet.urbanstores.sharePreference.AppPref
 import com.netSet.urbanstores.utills.Validation
 import java.io.ByteArrayOutputStream
@@ -37,7 +41,14 @@ class UpdateProfileFragment : BaseFragment(), TextWatcher {
     private var isAppRunning = false
     var imageBitmap: Bitmap? = null
     var imgPaths: File? = null
+    lateinit var viewmodel: MainViewModel
     lateinit var updateProfileBinding: FragmentUpdateProfileBinding
+
+    lateinit var name:String
+    lateinit var email:String
+    lateinit var profile_img:String
+    lateinit var address:String
+    lateinit var phone:String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,13 +56,16 @@ class UpdateProfileFragment : BaseFragment(), TextWatcher {
     ): View? {
         updateProfileBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_update_profile, container, false)
+
+
+
         return updateProfileBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setToolBar(R.mipmap.back_48x48,"EDIT PROFILE",0)
+        setToolBar("back","EDIT PROFILE",0)
         isAppRunning = true
         onClick()
         counterGone()
@@ -59,6 +73,9 @@ class UpdateProfileFragment : BaseFragment(), TextWatcher {
         textWatchersValidation()
         hideBottomNavigation()
         sharePreferenceStoreNumber()
+
+        initiateViewModel()
+        setObserver()
     }
 
     private fun textWatchersValidation() {
@@ -73,74 +90,41 @@ class UpdateProfileFragment : BaseFragment(), TextWatcher {
         updateProfileBinding.tvPhoneNumber.text=data
     }
 
-    private fun onClick() {
+    private fun initiateViewModel() {
+        viewmodel = ViewModelProvider(this, MainViewModelFactory(activity as MainActivity))
+            .get(MainViewModel::class.java)
 
-      //  setBackGroundRecursive()
-//        (activity as MainActivity).activityMainBinding.profileImg.setOnClickListener {
-//            requireActivity().onBackPressed()
-//        }
+    }
+    private fun setObserver() {
+        viewmodel.UpdateProfileDetails.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            storeImageSF(it.body?.imageUrl)
+            (activity as MainActivity).replaceFragment(SettingFrag(), false, false)
+        })
+    }
+
+    private fun storeImageSF(imageUrl: String?) {
+        val appPrefs = AppPref(requireActivity())
+        appPrefs.setValue("image", imageUrl.toString())
+    }
+        private fun onClick() {
+
         updateProfileBinding.updateProfilePic.setOnClickListener {
             runtimePermission()
         }
         updateProfileBinding.btnUpdate.setOnClickListener {
-      /*      if (imageBitmap == null) {
-                (activity as MainActivity).showSnackBar("Please Select the Image")
-                return@setOnClickListener
-            }*/
+
+            name = updateProfileBinding.etNameUser.text.toString()
+            email = updateProfileBinding.etEmail.text.toString()
+            address = updateProfileBinding.etAddress.text.toString()
+            phone = updateProfileBinding.tvPhoneNumber.text.toString()
+
             if (validation()) {
-                (activity as MainActivity).replaceFragment(SettingFrag(), false, false)
+                Toast.makeText(context, RetroBuilder.authToken, Toast.LENGTH_LONG).show()
+                viewmodel.callUpdateUserProfileDetailRes(phone,name,email,profile_img,address)
             }
         }
     }
 
-/*    private fun initUi() {
-
-        updateProfileBinding.etNameUser.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                val str: String = p0.toString()
-                if (str.length > 0 && str.contains(" ")) {
-                    //(activity as MainActivity).showSnackBar("Space are not allowed")
-                    updateProfileBinding.etNameUser.setText("")
-                }
-            }
-
-            override fun afterTextChanged(p0: Editable?) {
-            }
-        })
-        updateProfileBinding.etEmail.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                val str: String = p0.toString()
-                if (updateProfileBinding.etAddress.getText().toString().startsWith(" ")){
-                  //  (activity as MainActivity).showSnackBar("Space are not allowed")
-                    updateProfileBinding.etEmail.setText("")
-                }
-            }
-
-            override fun afterTextChanged(p0: Editable?) {
-            }
-        })
-        updateProfileBinding.etAddress.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                val str: String = p0.toString()
-                if (str.length > 0 && str.contains(" ")) {
-                  //  (activity as MainActivity).showSnackBar("Space are not allowed")
-                    updateProfileBinding.etAddress.setText("")
-                }
-            }
-
-            override fun afterTextChanged(p0: Editable?) {
-            }
-        })
-    }*/
 
     override fun onDestroy() {
         super.onDestroy()
@@ -165,29 +149,14 @@ class UpdateProfileFragment : BaseFragment(), TextWatcher {
 
         if (updateProfileBinding.etAddress.text.toString().trim().isNullOrEmpty()) {
             updateProfileBinding.etAddress.requestFocus()
-            updateProfileBinding.etEmail.error="Address can't be empty."
+            updateProfileBinding.etAddress.error="Address can't be empty."
             return false
         }
         return true
     }
 
 
-/*    private fun setBackGroundRecursive() {
-        Handler(Looper.myLooper()!!).postDelayed({
-            if (isAppRunning) {
-                if (updateProfileBinding.etNameUser.text.toString().isNullOrEmpty() ||  updateProfileBinding.etEmail.text.toString()
-                        .isNullOrEmpty() || updateProfileBinding.etAddress.text.toString().isNullOrEmpty()
-                ) {
-                    updateProfileBinding.btnUpdate.setBackgroundColor(resources.getColor(R.color.btn_tint))
-                    updateProfileBinding.btnUpdate.setTextColor(resources.getColor(R.color.btn_text_clr))
-                } else {
-                    updateProfileBinding.btnUpdate.setBackgroundColor(resources.getColor(R.color.appbar_bg))
-                    updateProfileBinding.btnUpdate.setTextColor(resources.getColor(R.color.white))
-                }
-                setBackGroundRecursive()
-            }
-        }, 1)
-    }*/
+
 
     //image picker
     private fun imagePicker() {
@@ -208,7 +177,9 @@ class UpdateProfileFragment : BaseFragment(), TextWatcher {
             val uri: Uri = data?.data!!
             imageBitmap = MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, uri)
             //convert bitmap to file
+            profile_img = uri.toString()
             convertBitmapToFile()
+
             updateProfileBinding.updateProfilePic.setImageURI(uri)
         } else if (resultCode == ImagePicker.RESULT_ERROR) {
             Toast.makeText(requireActivity(), ImagePicker.getError(data), Toast.LENGTH_SHORT).show()

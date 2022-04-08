@@ -1,39 +1,38 @@
 package com.netSet.urbanstores.ui.cart
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.netSet.urbanstores.R
 import com.netSet.urbanstores.activities.MainActivity
 import com.netSet.urbanstores.base.BaseFragment
 import com.netSet.urbanstores.databinding.FragmentCartBinding
-import com.netSet.urbanstores.models.ShopProductsList
+import com.netSet.urbanstores.network.viewmodel.MainViewModelFactory
+import com.netSet.urbanstores.room.CartEntity
+import com.netSet.urbanstores.room.RoomDbViewModel
 import com.netSet.urbanstores.ui.cart.ConfirmPickup.OrderConfirmFrag
 
 class CartFrag : BaseFragment() {
 
-    var binding :FragmentCartBinding ?=null
-    var fruitsAdapter : FruitsCartAdapter ?=null
-    var vegiAdapter : VegitablesCartAdapter ?= null
-    var packageAdapter : PackageCartAdapter ?=null
+    var binding: FragmentCartBinding? = null
+    lateinit var fruitsAdapter: FruitsCartAdapter
+    var fruitsList: ArrayList<CartEntity>? = null
+    lateinit var mroomDbViewModel: RoomDbViewModel
 
-    var fruitsList : List<ShopProductsList> ? = null
-    var vegeList : List<ShopProductsList> ? = null
-    var packageList : List<ShopProductsList> ? = null
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
-/*    val ISFRUIT = 1
-    val ISVEGETABLE = 2
-    val ISPACKAGE = 3*/
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
-        if (rootView == null){
-            binding = DataBindingUtil.inflate(inflater,R.layout.fragment_cart,container,false)
-            rootView =  binding?.root
+        if (rootView == null) {
+            binding = DataBindingUtil.inflate(inflater, R.layout.fragment_cart, container, false)
+            rootView = binding?.root
         }
         return rootView
     }
@@ -41,53 +40,117 @@ class CartFrag : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        fruitsAdapter()
-        vegitablesAdapter()
-        packageAdapter()
-        checkoutBtnListner()
+        getBaseActivity().cartTotalAmount = 0.0F
+
+
+        mroomDbViewModel =
+            ViewModelProvider(this, MainViewModelFactory(activity as MainActivity)).get(
+                RoomDbViewModel::class.java
+            )
+        mroomDbViewModel.showAllProduct.observe(viewLifecycleOwner, Observer {
+            fruitsList = it as ArrayList<CartEntity>
+            adpterCall(fruitsList!!)
+        })
+
         hideBottomNavigation()
         counterGone()
-        ifListEmptyCode()
-        setToolBar(R.mipmap.back_48x48,"MY CART",0)
-//        (activity as MainActivity).activityMainBinding.bottomGreenBg.visibility = View.VISIBLE
+        checkoutBtnListner()
+        setToolBar("back", "MY CART", 0)
+
     }
 
-    private fun ifListEmptyCode() {
-        if (fruitsList?.isEmpty()!!&&vegeList?.isEmpty()!! && packageList?.isEmpty()!!){
-            binding?.vegitablesConstraint?.visibility= View.GONE
-            binding?.noDataFoundTxt?.visibility = View.VISIBLE
-        }else if (fruitsList?.isEmpty()!!){
-            binding?.fruitsConstraint?.visibility = View.GONE
-        }else if (vegeList?.isEmpty()!!){
-            binding?.vegitablesConstraint?.visibility = View.GONE
-        }else if (packageList?.isEmpty()!!){
-            binding?.packageConstraint?.visibility = View.GONE
-        }
+    private fun adpterCall(list: List<CartEntity>) {
+        fruitsAdapter = FruitsCartAdapter(this, list)
+        val manager = LinearLayoutManager(context)
+        binding?.fruitsRecyclerview?.setHasFixedSize(true)
+        binding?.fruitsRecyclerview?.layoutManager = manager
+        binding?.fruitsRecyclerview?.adapter = fruitsAdapter
+    }
 
-        if (packageList?.isEmpty()!!){
-            binding?.packageConstraint?.visibility = View.GONE
-        }
+    fun setTotal() {
+        binding?.totalRupee?.text = "Rs " + getBaseActivity().cartTotalAmount.toString()
+        binding?.savedRupee?.text = "Saved Rs " + getBaseActivity().totalDiscountAmount.toString()
+    }
 
-        if (vegeList?.isEmpty()!!){
-            binding?.vegitablesConstraint?.visibility = View.GONE
-        }
+    fun removeItemWhenCartZero(position: Int) {
+        fruitsList?.removeAt(position)
+        notifyAdapter()
+    }
 
-        if (fruitsList?.isEmpty()!!){
-            binding?.fruitsConstraint?.visibility = View.GONE
+    fun decreaseItemCount(position: Int) {
+        if (fruitsList?.get(position)?.productsQuantity?.toInt()!! - 1 > 0) {
+            fruitsList?.get(position)?.productsQuantity =
+                (fruitsList?.get(position)?.productsQuantity!!.toInt()!! - 1).toString()
+            notifyAdapter()
+        } else {
+            removeItemWhenCartZero(position)
         }
+    }
+
+    fun notifyAdapter() {
+        getBaseActivity().cartTotalAmount = 0F
+        fruitsAdapter.notifyDataSetChanged()
+    }
+
+    fun increaseItemCount(position: Int) {
+        fruitsList?.get(position)?.productsQuantity =
+            (fruitsList?.get(position)?.productsQuantity!!.toInt()!! + 1).toString()
+        notifyAdapter()
     }
 
     private fun checkoutBtnListner() {
         binding?.checkoutBtn?.setOnClickListener {
             val bundle = Bundle()
             val fragment = OrderConfirmFrag()
-            bundle.putInt("totalAmount",getBaseActivity().cartTotalAmount)
+            bundle.putInt("totalAmount", getBaseActivity().cartTotalAmount.toInt())
             fragment.arguments = bundle
             getBaseActivity().replaceFragment(fragment, true, false)
         }
     }
 
-    private fun packageAdapter(){
+}
+    /*fun removeVegeItem(position: Int) {
+        vegeList?.get(position)?.isAddedToCart =false
+        vegitablesAdapter()
+        ifListEmptyCode()
+    }
+*/
+    /*  fun removePackageItem(position: Int) {
+          packageList?.get(position)?.isAddedToCart =false
+          packageAdapter()
+          ifListEmptyCode()
+          binding?.packageConstraint?.visibility= View.GONE
+      }*/
+
+
+
+    /* private fun ifListEmptyCode() {
+         if (fruitsList?.isEmpty()!!&&vegeList?.isEmpty()!! && packageList?.isEmpty()!!){
+             binding?.vegitablesConstraint?.visibility= View.GONE
+             binding?.noDataFoundTxt?.visibility = View.VISIBLE
+         }else if (fruitsList?.isEmpty()!!){
+             binding?.fruitsConstraint?.visibility = View.GONE
+         }else if (vegeList?.isEmpty()!!){
+             binding?.vegitablesConstraint?.visibility = View.GONE
+         }else if (packageList?.isEmpty()!!){
+             binding?.packageConstraint?.visibility = View.GONE
+         }
+
+         if (packageList?.isEmpty()!!){
+             binding?.packageConstraint?.visibility = View.GONE
+         }
+
+         if (vegeList?.isEmpty()!!){
+             binding?.vegitablesConstraint?.visibility = View.GONE
+         }
+
+         if (fruitsList?.isEmpty()!!){
+             binding?.fruitsConstraint?.visibility = View.GONE
+         }
+     }
+ */
+
+   /* private fun packageAdapter(){
         packageList = getBaseActivity().shopProductsList.filter {
             it.productCategory.equals("Packages")&&
                     it.isAddedToCart.equals(true)
@@ -99,9 +162,9 @@ class CartFrag : BaseFragment() {
         binding?.packageRecyclerview?.adapter = packageAdapter
 
         binding?.packageCount?.text = vegeList?.size.toString() +" Item"
-    }
+    }*/
 
-    private fun vegitablesAdapter() {
+  /*  private fun vegitablesAdapter() {
 
         vegeList = getBaseActivity().shopProductsList.filter {
             it.productCategory.equals("Vegetables")&&
@@ -116,8 +179,8 @@ class CartFrag : BaseFragment() {
 
         binding?.vegetableCount?.text = vegeList?.size.toString() +" Item"
     }
-
-    private fun fruitsAdapter() {
+*/
+   /* private fun fruitsAdapter() {
 
         fruitsList = getBaseActivity().shopProductsList.filter {
             it.productCategory.equals("Fruits") &&
@@ -131,27 +194,7 @@ class CartFrag : BaseFragment() {
         binding?.fruitsRecyclerview?.adapter = fruitsAdapter
 
         binding?.fruitsCount?.text = fruitsList?.size.toString() +" Item"
-    }
-
-    fun removeItemWhenCartZero(position: Int) {
-        fruitsList?.get(position)?.isAddedToCart=false
-        fruitsAdapter()
-        ifListEmptyCode()
-        binding?.fruitsConstraint?.visibility= View.GONE
-    }
-
-    fun removeVegeItem(position: Int) {
-        vegeList?.get(position)?.isAddedToCart =false
-        vegitablesAdapter()
-        ifListEmptyCode()
-    }
-
-    fun removePackageItem(position: Int) {
-        packageList?.get(position)?.isAddedToCart =false
-        packageAdapter()
-        ifListEmptyCode()
-        binding?.packageConstraint?.visibility= View.GONE
-    }
+    }*/
 
 
 /*    override fun onStop() {
@@ -160,10 +203,7 @@ class CartFrag : BaseFragment() {
         getBaseActivity().totalDiscountAmount = 0
     }*/
 
-/*    fun setTotal() {
-        binding?.totalRupee?.text = "Rs "+getBaseActivity().cartTotalAmount.toString()
-        binding?.savedRupee?.text = "Saved Rs "+getBaseActivity().totalDiscountAmount.toString()
-    }*/
+
 
 /*    fun increaseQuantitiy(position: Int, type: Int) {
         getBaseActivity().cartTotalAmount = 0
@@ -197,5 +237,5 @@ class CartFrag : BaseFragment() {
         fruitsAdapter?.notifyDataSetChanged()
     }*/
 
-}
+
 

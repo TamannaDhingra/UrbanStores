@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!--<data>
+        <variable
+            name="AllProducts"
+            type="com.netSet.urbanstores.models.AllProductListModel.AllProducts.Datum" />
+    </data>
+-->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/itemConstraint"
         android:layout_width="match_parent"
@@ -32,24 +38,24 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/productImg"
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/_65sdp"
                     android:layout_height="@dimen/_65sdp"
                     android:src="@mipmap/img_4"
-                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/discountTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
                     android:background="@drawable/discount_circular_drawable"
                     android:fontFamily="@font/sofiaprosemibold"
-                    android:text="10%\noff"
-                    android:lineSpacingExtra="@dimen/_1sdp"
                     android:gravity="center"
-                    android:layout_marginEnd="@dimen/_17sdp"
-                    android:layout_marginTop="@dimen/_7sdp"
+                    android:lineSpacingExtra="@dimen/_1sdp"
+                    android:text="10%\noff"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_7sdp"
                     app:layout_constraintEnd_toStartOf="@+id/productName"
@@ -57,83 +63,133 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/productName"
+                    style="@style/regularHeadingTxts"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    style="@style/regularHeadingTxts"
-                    android:text="Banana - Yelakki"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text=""
                     app:layout_constraintStart_toEndOf="@+id/productImg"
-                    android:layout_marginTop="@dimen/_10sdp" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/productAmount"
+                    style="@style/regularHeadingTxts"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/regularHeadingTxts"
                     android:text="90 Rs"
-                    android:textSize="@dimen/_13sdp"
                     android:textColor="@color/amount_txt_color"
-                    app:layout_constraintTop_toBottomOf="@+id/productName"
-                    app:layout_constraintStart_toEndOf="@+id/productImg" />
+                    android:textSize="@dimen/_13sdp"
+                    app:layout_constraintStart_toEndOf="@+id/productImg"
+                    app:layout_constraintTop_toBottomOf="@+id/productName" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/mrpTxt"
+                    style="@style/regularHeadingTxts"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/regularHeadingTxts"
-                    app:layout_constraintStart_toEndOf="@+id/productAmount"
-                    app:layout_constraintTop_toBottomOf="@+id/productName"
-                    android:text="@string/mrp_txt"
                     android:layout_marginTop="@dimen/_3sdp"
+                    android:text="@string/mrp_txt"
+                    android:textColor="@color/mrp_discount_txt_color"
                     android:textSize="@dimen/_10sdp"
-                    android:textColor="@color/mrp_discount_txt_color" />
+                    app:layout_constraintStart_toEndOf="@+id/productAmount"
+                    app:layout_constraintTop_toBottomOf="@+id/productName" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/productDiscount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     style="@style/regularHeadingTxts"
-                    app:layout_constraintStart_toEndOf="@+id/mrpTxt"
-                    app:layout_constraintTop_toBottomOf="@+id/productName"
-                    android:text="@string/rs_strikethrough_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
                     android:layout_marginStart="@dimen/_2sdp"
                     android:layout_marginTop="@dimen/_3sdp"
+                    android:text="Rs 100"
+                    android:textColor="@color/mrp_discount_txt_color"
                     android:textSize="@dimen/_10sdp"
-                    android:textColor="@color/mrp_discount_txt_color" />
+                    app:layout_constraintStart_toEndOf="@+id/mrpTxt"
+                    app:layout_constraintTop_toBottomOf="@+id/productName" />
 
                 <View
                     android:layout_width="0dp"
                     android:layout_height="0.8dp"
-                    android:background="#808080"
                     android:layout_marginTop="@dimen/_3sdp"
-                    app:layout_constraintStart_toStartOf="@+id/productDiscount"
+                    android:background="#808080"
+                    android:text=""
+                    app:layout_constraintBottom_toBottomOf="@+id/productDiscount"
                     app:layout_constraintEnd_toEndOf="@+id/productDiscount"
-                    app:layout_constraintTop_toTopOf="@+id/productDiscount"
-                    app:layout_constraintBottom_toBottomOf="@+id/productDiscount"/>
+                    app:layout_constraintStart_toStartOf="@+id/productDiscount"
+                    app:layout_constraintTop_toTopOf="@+id/productDiscount" />
 
 
-                <androidx.appcompat.widget.AppCompatSpinner
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/quantitys"
-                    android:layout_width="@dimen/_57sdp"
-                    android:padding="@dimen/_2sdp"
+                    android:layout_width="wrap_content"
                     android:layout_height="@dimen/_20sdp"
                     android:layout_marginStart="@dimen/_8sdp"
-                    android:background="@drawable/rect_bg"
                     android:layout_marginBottom="@dimen/_13sdp"
+                    android:background="@drawable/rect_bg"
+                    android:padding="@dimen/_2sdp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/productImg" />
-
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/itemAddButton"
                     android:layout_width="@dimen/_47sdp"
                     android:layout_height="@dimen/_29sdp"
+                    android:layout_margin="@dimen/_10sdp"
                     android:text="@string/add_button"
                     android:textSize="@dimen/_9sdp"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_margin="@dimen/_10sdp" />
+                    app:layout_constraintEnd_toEndOf="parent" />
 
-                <com.google.android.material.button.MaterialButton
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/c_view"
+                    android:layout_width="wrap_content"
+                    android:visibility="visible"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/decreaseItems"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_25sdp"
+                        android:src="@mipmap/minus_64x64"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                       android:layout_margin="@dimen/_10sdp"
+                        app:layout_constraintStart_toStartOf="parent"/>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/increaseItems"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_margin="@dimen/_10sdp"
+                        android:src="@mipmap/plus_64x64"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/itemCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:fontFamily="@font/sofiaprosemibold"
+
+                        android:paddingBottom="@dimen/_3sdp"
+                        android:paddingLeft="@dimen/_3sdp"
+                        android:paddingRight="@dimen/_3sdp"
+                        android:textColor="@color/green_bg"
+                        android:textSize="@dimen/_15sdp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/increaseItems"
+                        app:layout_constraintHorizontal_bias="0.756"
+                        app:layout_constraintStart_toEndOf="@+id/decreaseItems" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <!--<com.google.android.material.button.MaterialButton
                     android:id="@+id/itemRemoveButton"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/_29sdp"
@@ -143,11 +199,12 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:layout_margin="@dimen/_10sdp" />
-
+-->
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

@@ -2,16 +2,14 @@ package com.netSet.urbanstores.ui.orders.myOrders
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.netSet.urbanstores.R
-import com.netSet.urbanstores.activities.MainActivity
 import com.netSet.urbanstores.base.BaseFragment
 import com.netSet.urbanstores.databinding.FragmentMyOrdersBinding
 import com.netSet.urbanstores.models.ModelClssMyOrders
-import com.netSet.urbanstores.ui.settings.SettingFrag
+import com.netSet.urbanstores.sharePreference.AppPref
 
 
 class FragmentMyOrders : BaseFragment() {
@@ -30,7 +28,7 @@ class FragmentMyOrders : BaseFragment() {
         arrayList.add(ModelClssMyOrders("1 X Banana-Yekali(12pcs),1X-Onion","5 june 2021 at 7:54 PM","Rs 190"))
 
 //        navigationBgVisiblity()
-        setToolBar(R.mipmap.profile,"MY ORDERS",R.mipmap.cart_3x)
+        setToolBar(AppPref(requireContext()).getUserImage(),"MY ORDERS",R.mipmap.cart_3x)
         showBottomNavigation()
         counterVisible()
      /*   (activity as MainActivity).activityMainBinding.profileImg.setOnClickListener {

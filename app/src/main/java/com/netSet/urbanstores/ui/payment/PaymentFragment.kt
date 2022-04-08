@@ -1,26 +1,17 @@
 package com.netSet.urbanstores.ui.payment
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import com.bumptech.glide.Glide.init
 import com.netSet.urbanstores.R
-import com.netSet.urbanstores.activities.MainActivity
 import com.netSet.urbanstores.base.BaseFragment
 import com.netSet.urbanstores.databinding.FragmentPaymentBinding
 
 
 class PaymentFragment : BaseFragment() {
 lateinit var paymentBinding:FragmentPaymentBinding
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,8 +24,10 @@ lateinit var paymentBinding:FragmentPaymentBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setToolBar(R.mipmap.back_48x48,"MAKE PAYMENT",0)
+        setToolBar("back","MAKE PAYMENT",0)
         onClick()
+        getTotalAmntUsingBundle()
+        grandTotalAmnt()
     }
 
     private val congratsDialog by lazy {
@@ -50,4 +43,21 @@ lateinit var paymentBinding:FragmentPaymentBinding
             congratsDialog.show(requireFragmentManager(),"CongratulationDialog")
         }
     }
+
+    private fun getTotalAmntUsingBundle() {
+       var ttlAmnt = arguments?.getInt("totalAmount")!!
+        paymentBinding.tvRupees?.text = ttlAmnt.toString()
+    }
+
+    private fun grandTotalAmnt() {
+        if (paymentBinding?.tvRupees?.text.toString().toInt()>0){
+            paymentBinding?.tvDeliveryCharge?.text = 20.toString()
+        }
+
+        val totalAmnt = paymentBinding?.tvRupees?.text.toString().toInt()
+        val deliveryAmnt = paymentBinding?.tvDeliveryCharge?.text.toString().toInt()
+        paymentBinding?.tvGrandTotal?.text = (totalAmnt+deliveryAmnt).toString()
+    }
+
+
 }

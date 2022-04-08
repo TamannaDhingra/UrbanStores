@@ -42,7 +42,7 @@ class VegitablesCartAdapter(
         }
 
         //Cart Pieces Decrement Listener
-        holder.decreaseI.setOnClickListener {
+       /* holder.decreaseI.setOnClickListener {
             if (holder.items.text.toString().toInt()-1==0){
                 fragment.removeVegeItem(position)
             }
@@ -50,7 +50,7 @@ class VegitablesCartAdapter(
                 holder.proPcs.setText("" + (Integer.parseInt(holder.items.getText().toString()) - 1) +" Pcs")
                 holder.items.setText("" + (Integer.parseInt(holder.items.getText().toString()) - 1))
             }
-        }
+        }*/
 
         //values  Initialization
         holder.proName.text = vegeList.get(position).productname

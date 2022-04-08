@@ -6,36 +6,37 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.*
 import java.util.concurrent.TimeUnit
 
-class ApiConstant {
+object RetroBuilder {
 
     private var requestTimeout = 60
     var authToken = ""
 
     private var retrofit : Retrofit? = null
     private var okHttpClient: OkHttpClient? = null
-    val BASE_URL: String
-        get() = ""
 
+    const val APP_VERSION = "1.0"
+    const val DEVICE_TYPE = "A"
+    const val APPLICATION_JSON = "application/json"
 
     // Create Service
-    val service = getClient().create(ApiService::class.java)
+
+    val service = UserLogin().create(ApiService::class.java)
 
     fun getApiServices(): ApiService? {
         return service
     }
 
     // Create Retrofit Client
-    fun getClient(): Retrofit {
+    fun UserLogin(): Retrofit {
 
         if (okHttpClient == null)
             initOkHttp()
 
         if (retrofit == null) {
             retrofit = Retrofit.Builder()
-                .baseUrl(BASE_URL)
+                .baseUrl("http://198.211.110.165/urbanstorephp/public/api/")
                 .client(okHttpClient!!)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create()).build()
@@ -43,6 +44,7 @@ class ApiConstant {
 
         return retrofit!!
     }
+
 
     private fun initOkHttp() {
         val httpClient = OkHttpClient().newBuilder()
@@ -52,18 +54,18 @@ class ApiConstant {
 
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
-
         httpClient.addInterceptor(interceptor)
 
         httpClient.addInterceptor { chain ->
             val original = chain.request()
             val requestBuilder = original.newBuilder()
-                .addHeader("Accept", "application/json")
-                .addHeader("Content-Type", "application/json")
-                .addHeader("timezone", TimeZone.getDefault().id)
+                .addHeader("appversion", APP_VERSION)
+                .addHeader("Content-Type", APPLICATION_JSON)
+                .addHeader("devicetype", DEVICE_TYPE)
+                .addHeader("Accept", APPLICATION_JSON)
 
             if (!TextUtils.isEmpty(authToken)) {
-                requestBuilder.addHeader("Authorization", "Token "+authToken)
+                requestBuilder.addHeader("Authorization", "Bearer "+authToken)
             }
 
             val request = requestBuilder.build()
@@ -72,4 +74,11 @@ class ApiConstant {
 
         okHttpClient = httpClient.build()
     }
+
 }
+
+
+
+
+
+

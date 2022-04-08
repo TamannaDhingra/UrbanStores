@@ -6,8 +6,11 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
+import com.netSet.urbanstores.R
 import com.netSet.urbanstores.activities.MainActivity
 import com.netSet.urbanstores.models.AllProductsModel
 
@@ -24,6 +27,8 @@ open class BaseFragment : Fragment() {
         if (activity is MainActivity) {
             mainActivity = context as MainActivity
         }
+
+        baseActivity?.initiateLoader()
     }
 
     fun getBaseActivity(): BaseActivity {
@@ -38,15 +43,35 @@ open class BaseFragment : Fragment() {
         mainActivity?.activityMainBinding?.countBadge?.visibility = View.GONE
     }
 
-    fun setToolBar(profileIcon : Int,title: String, menuIcon : Int){
-        (activity as MainActivity).activityMainBinding.profileImg.setImageResource(profileIcon)
+    fun setToolBar(profileIcon: String?, title: String, menuIcon: Int){
         (activity as MainActivity).activityMainBinding.title.text = title
         (activity as MainActivity).activityMainBinding.menuIcon.setImageResource(menuIcon)
+        when(profileIcon) {
+            "back" -> {
+                (activity as MainActivity).activityMainBinding.profileImg.setImageResource(R.mipmap.back_48x48)
+                var valueInPixels =  getResources().getDimension(R.dimen._20sdp)
+                (activity as MainActivity).activityMainBinding.profileImg.layoutParams.height=
+                    valueInPixels.toInt()
+                (activity as MainActivity).activityMainBinding.profileImg.layoutParams.width=valueInPixels.toInt()
+            }
+            "" -> {
+                (activity as MainActivity).activityMainBinding.profileImg.setImageResource(R.mipmap.profile)
+            }
+            "none" -> {
+                (activity as MainActivity).activityMainBinding.profileImg.setImageResource(0)
+            }
+            else -> {
+                setImageUsingGlide(getBaseActivity().currentFragment!!,profileIcon.toString(),(activity as MainActivity).activityMainBinding.profileImg)
+                var valueInPixels =  getResources().getDimension(R.dimen._20sdp)
+                (activity as MainActivity).activityMainBinding.profileImg.layoutParams.height=valueInPixels.toInt()
+                (activity as MainActivity).activityMainBinding.profileImg.layoutParams.width=valueInPixels.toInt()
+            }
+        }
     }
 
   /*  fun navigationBgVisiblity(){
         (activity as MainActivity).activityMainBinding?.bottomGreenBg?.visibility = View.GONE
-    }*/
+ }*/
 
     fun hideToolBar(){
         (activity as MainActivity).activityMainBinding?.toolBar?.visibility = View.GONE
@@ -64,9 +89,7 @@ open class BaseFragment : Fragment() {
         (activity as MainActivity).activityMainBinding?.bottomNavigationView?.visibility = View.VISIBLE
     }
 
-/*    fun backStackCode(){
-        getBaseActivity().supportFragmentManager.popBackStack()
-    }*/
+
     fun setImageUsingGlide(context: Fragment, url: String, imageView: ImageView){
         Glide.with(context)
             .load(url)

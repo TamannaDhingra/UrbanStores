@@ -47,18 +47,7 @@ class AppPref(var ctx: Context) {
         return gson.fromJson(getPrefs().getString(key,""),type)
     }
 
-    fun setToken(key : String,value: String){
-        val edit = getPrefs().edit()
-        edit.putString(key, value)
-        edit.apply()
-    }
 
-    fun getToken(key: String) :String?{
-        return getPrefs().getString(key,"")
-    }
-    *//*   fun deleteData(){
-           setString(EMAIL_ADDRESS,"")
-       }
    *//*
 
     fun  delete(): Boolean {
@@ -67,4 +56,24 @@ class AppPref(var ctx: Context) {
     fun  delete(): Boolean {
         return getPrefs().edit().clear().commit()
     }
+
+    fun setUserImage(key: String, value:String) {
+        val edit = getPrefs().edit()
+        edit.putString(key, value)
+        edit.apply()
+    }
+    fun getUserImage() : String? {
+        return getPrefs().getString("image","")
+    }
+
+    fun setToken(value: String){
+        val edit = getPrefs().edit()
+        edit.putString("authToken", value)
+        edit.apply()
+    }
+
+    fun getToken() :String{
+        return getPrefs().getString("authToken","").toString()
+    }
+
 }

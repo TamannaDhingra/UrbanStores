@@ -15,6 +15,7 @@
     <color name="viewColor">#E5E5E5</color>
     <color name="viewColor2">#BEBEBE</color>
     <color name="bg_cons">#F2F2F2</color>
+    <color name="shimer_items_color">#FAF5FA</color>
 
     <color name="green_bg">#37d176</color>
     <color name="bottom_navigation_txt_color">#D3D3D3</color>
@@ -34,5 +35,7 @@
     <color name="lightgrey">#E6E6E8</color>
     <color name="orange">#FF7C00</color>
     <color name="badge_color">#F59B2C</color>
+
+    <color name="shimmer_placeholder">#dddddd</color>
 
 </resources>

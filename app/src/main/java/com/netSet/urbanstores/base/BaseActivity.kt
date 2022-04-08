@@ -1,5 +1,6 @@
 package com.netSet.urbanstores.base
 
+import android.app.ProgressDialog
 import android.content.Context
 import android.view.MotionEvent
 import android.view.View
@@ -13,6 +14,7 @@ import com.netSet.urbanstores.models.AllProductsModel
 import com.netSet.urbanstores.models.ShopProductsList
 import com.netSet.urbanstores.ui.shops.ShopProducts.CartCallback
 import com.netSet.urbanstores.ui.shops.ShopProducts.allProducts.AllproductsAdapter
+import kotlinx.android.synthetic.main.activity_main.*
 
 open class BaseActivity : AppCompatActivity() {
 
@@ -20,16 +22,20 @@ open class BaseActivity : AppCompatActivity() {
     var fragmentTransaction : FragmentTransaction?= null
     var adapter : AllproductsAdapter?= null
     var shopProductsList : ArrayList<ShopProductsList> = ArrayList()
-    var cartTotalAmount : Int = 0
+    var cartTotalAmount : Float = 0.0F
     var tabPosition : Int = 0
     var itemCounts : Int = 0
     var totalDiscountAmount : Int = 0
+    lateinit var progressDialog:ProgressDialog
 
     fun replaceFragment(mFragment: Fragment, isBack: Boolean, allowAnim: Boolean){
         currentFragment = mFragment
         fragmentTransaction = supportFragmentManager.beginTransaction()
 
-        if (isBack){ fragmentTransaction!!.addToBackStack(mFragment::class.java.simpleName) }
+        if (isBack)
+        {
+            fragmentTransaction!!.addToBackStack(mFragment::class.java.simpleName)
+        }
 
         if (allowAnim){
             fragmentTransaction?.setCustomAnimations(
@@ -98,5 +104,29 @@ open class BaseActivity : AppCompatActivity() {
         return packageList as ArrayList<ShopProductsList>
     }
 
+    fun initiateLoader(){
+        progressDialog = ProgressDialog(this)
+        progressDialog.setTitle("Loading")
+        progressDialog.setMessage("Please wait")
+    }
 
+    fun showLoader() {
+        /** Progress Dialog*/
+
+        progressDialog.show()
+
+    }
+
+    fun hideLoader(){
+       progressDialog.dismiss()
+    }
+
+
+    fun hideSpinkit(){
+      spin_kit.visibility=View.GONE
+    }
+
+    fun showSpinkit(){
+        spin_kit.visibility=View.VISIBLE
+    }
 }

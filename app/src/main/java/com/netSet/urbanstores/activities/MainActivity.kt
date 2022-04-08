@@ -32,6 +32,7 @@ class MainActivity : BaseActivity() {
     lateinit var activityMainBinding : ActivityMainBinding
     var appPrefs = AppPref(this)
     private  var data: String ? =null
+    lateinit var img:String
     @RequiresApi(Build.VERSION_CODES.M)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -78,7 +79,7 @@ class MainActivity : BaseActivity() {
                     replaceFragment(FragmentMyOrders(), true, false)
                     true
                 }
-                R.id.mycartMenu ->{
+                R.id.mycartMenu -> {
                     replaceFragment(NotificationFrag(), true, false)
                     true
                 }
@@ -110,10 +111,12 @@ class MainActivity : BaseActivity() {
         }
             if (getVisibleFragment() is ShopsFragment||getVisibleFragment() is PhoneVerifyFragment ){
                 finish()
-        } else if (getVisibleFragment() is FragmentMyOrders|| getVisibleFragment() is NotificationFrag||getVisibleFragment() is SettingFrag){
+        }
+            else if (getVisibleFragment() is FragmentMyOrders|| getVisibleFragment() is NotificationFrag||getVisibleFragment() is SettingFrag){
                 activityMainBinding.bottomNavigationView.selectedItemId = R.id.homeMenu
 
-        } else {
+        }
+            else {
                 localFragmentManager.popBackStack()
             }
    }
@@ -127,6 +130,14 @@ class MainActivity : BaseActivity() {
         }
         catch (e: java.lang.Exception) {
         }
+    }
+
+
+    private fun sharePreferenceStoreNumber() {
+        val appPrefs = AppPref(MainActivity())
+        img=appPrefs.getValue("image").toString()
+      //  activityMainBinding.profileImg.setI
+
     }
 
     fun dialogExitApp() {

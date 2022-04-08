@@ -25,7 +25,7 @@
     </style>
 
     <style name="MyCustomTabLayout" parent="Widget.Design.TabLayout">
-        <item name="tabMaxWidth">@dimen/_87sdp</item>
+
         <item name="maxHeight">@dimen/_48sdp</item>
         <item name="tabIndicatorColor">@color/green_bg</item>
         <item name="tabIndicatorHeight">@dimen/_2sdp</item>
@@ -64,4 +64,10 @@
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowDisablePreview">true</item>
     </style>
+
+    <style name="ShapeAppearanceOverlay.App.CornerSize50Percent" parent="">
+        <item name="cornerSize">50%</item>
+    </style>
+
+
 </resources>

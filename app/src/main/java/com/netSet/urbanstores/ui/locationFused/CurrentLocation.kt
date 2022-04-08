@@ -79,7 +79,7 @@ class CurrentLocation : BaseFragment() {
      counterGone()
         isAppRunning=true
         onClick()
-        setToolBar(R.mipmap.back_48x48,"Choose Delivery Location",0)
+        setToolBar("back","Choose Delivery Location",0)
         hideBottomNavigation()
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         getLastLocation()

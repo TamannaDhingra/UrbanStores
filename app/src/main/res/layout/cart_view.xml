@@ -29,7 +29,7 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/productImg"
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/_65sdp"
                     android:layout_height="@dimen/_65sdp"
                     android:src="@mipmap/img_4"
                     app:layout_constraintTop_toTopOf="parent"
@@ -43,7 +43,7 @@
                     android:background="@drawable/discount_circular_drawable"
                     android:fontFamily="@font/sofiaprosemibold"
                     android:text="10%\noff"
-                    android:layout_marginEnd="@dimen/_17sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_marginTop="@dimen/_7sdp"
                     android:gravity="center"
                     android:textColor="@color/white"
@@ -102,7 +102,7 @@
                     android:id="@+id/quantitys"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1 Pcs"
+                    android:text="1"
                     style="@style/regularHeadingTxts"
                     android:layout_marginTop="@dimen/_3sdp"
                     android:textSize="@dimen/_11sdp"
@@ -126,7 +126,7 @@
                     android:id="@+id/itemCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1"
+
                     android:textSize="@dimen/_15sdp"
                     android:fontFamily="@font/sofiaprosemibold"
                     android:textColor="@color/green_bg"

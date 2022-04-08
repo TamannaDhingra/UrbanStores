@@ -10,23 +10,16 @@ import com.netSet.urbanstores.base.BaseActivity
 import com.netSet.urbanstores.databinding.CartViewBinding
 import com.netSet.urbanstores.models.AllProductsModel
 import com.netSet.urbanstores.models.ShopProductsList
+import com.netSet.urbanstores.room.CartEntity
 import kotlin.properties.Delegates
 
 class FruitsCartAdapter(
     var fragment: CartFrag,
-    var productsList: List<ShopProductsList>?
+    var productsList: List<CartEntity>?
 ) : RecyclerView.Adapter<FruitsCartAdapter.ViewHolder>() {
 
     inner class ViewHolder(val binding : CartViewBinding) : RecyclerView.ViewHolder(binding.root){
-        val increaseI = binding.increaseItems
-        val decreaseI = binding.decreaseItems
-        val items = binding.itemCount
-        val proName = binding.productName
-        val proPrice = binding.productAmount
-        val proDiscount = binding.productDiscount
-        val proPcs = binding.quantitys
-        val fruitImg = binding.productImg
-        val productDiscount = binding.discountTxt
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -37,48 +30,48 @@ class FruitsCartAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        //Cart Pieces Increment Listener
-        holder.increaseI.setOnClickListener {
-                holder.proPcs.setText(""+(Integer.parseInt(holder.items.getText().toString()) + 1) +" Pcs")
-                holder.items.setText(""+(Integer.parseInt(holder.items.getText().toString()) + 1))
+        val currentItem= productsList?.get(position)
+        holder.binding.productName.text=currentItem?.productname.toString()
+        holder.binding.productAmount.text=currentItem?.productPrice.toString()
+        holder.binding.quantitys.setText(currentItem?.productsQuantity.toString() + "Pcs")
+
+        Log.e("datais", productsList?.get(position)?.isAddedToCart.toString())
+        fragment.setImageUsingGlide(
+            fragment,
+            productsList?.get(position)?.image_url.toString(),
+            holder.binding.productImg
+        )
+
+        holder.binding.itemCount.setText(currentItem?.productsQuantity.toString() )
+        /** Cart Pieces Increment Listener*/
+        holder.binding.increaseItems.setOnClickListener {
+
+            fragment.increaseItemCount(position)
+        }
+        /**  Cart Pieces Decrement Listener */
+        holder.binding.decreaseItems.setOnClickListener {
+
+            fragment.decreaseItemCount(position)
+
         }
 
-        //Cart Pieces Decrement Listener
-        holder.decreaseI.setOnClickListener {
 
-            if (holder.items.text.toString().toInt()-1==0){
-                fragment.removeItemWhenCartZero(position)
+        //Total Price Logic
+        val totalFruitPrice = productsList?.get(position)?.productPrice?.toFloat()
+        val totalFruitPcs = productsList?.get(position)?.productsQuantity?.toInt()
+        val finalPrice = (totalFruitPrice?.times(totalFruitPcs!!)).toString()
 
-            }else if (holder.items.text.toString().toInt()>0){
-                holder.proPcs.setText("" + (Integer.parseInt(holder.items.getText().toString()) - 1) + " Pcs")
-                holder.items.setText("" + (Integer.parseInt(holder.items.getText().toString()) - 1))
-            }
-        }
+        //   val finalPrice = (totalFruitPrice*(totalFruitPcs)).toString()
 
-        //values  Initialization
-        if (productsList?.get(position)?.isAddedToCart!! && productsList?.get(position)?.productCategory.equals("Fruits")){
-            holder.proName.text = productsList?.get(position)?.productname
-            holder.proPrice.text =  "Rs "+productsList?.get(position)?.productPrice.toString()
-            holder.proDiscount.text = "Rs "+productsList?.get(position)?.productPrice.toString()
-            holder.fruitImg.setImageResource(productsList?.get(position)?.productImg!!)
-            holder.productDiscount.text = productsList?.get(position)?.discount.toString()+"%\noff"
-            holder.proPcs.text = (productsList?.get(position)?.productPcs+1).toString() + " Pcs"
-            holder.items.text = (productsList?.get(position)?.productPcs+1).toString()
-        }
-
-/*        //Total Price Logic
-        val totalFruitPrice = productsList?.get(position)?.productPrice.toString().toInt()
-        val totalFruitPcs = productsList?.get(position)?.productPcs.toString().toInt()+1
-        val finalPrice = totalFruitPrice*totalFruitPcs*/
-
-        //Discount Value Set in final
-//        fragment.getBaseActivity().totalDiscountAmount = fragment.getBaseActivity().totalDiscountAmount+ productsList?.get(position)?.discount?.toInt()!!
 
         //Set Total Price
-     /*   fragment.getBaseActivity().cartTotalAmount =  fragment.getBaseActivity().cartTotalAmount + finalPrice
+        fragment.getBaseActivity().cartTotalAmount =  fragment.getBaseActivity().cartTotalAmount + finalPrice.toFloat()
         Log.e("thefinalAmountIs", fragment.getBaseActivity().cartTotalAmount.toString())
-        fragment.setTotal()*/
+        fragment.setTotal()
+
+
     }
+
 
     override fun getItemCount(): Int {
         return productsList?.size!!

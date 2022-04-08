@@ -50,6 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_8sdp"
             android:layout_marginEnd="@dimen/_10sdp"
+
             android:fontFamily="@font/sofiaproregular"
             android:text="130"
             android:textColor="@color/pro_black"
@@ -62,12 +63,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginEnd="2dp"
             android:fontFamily="@font/sofiaproregular"
             android:text="Rs"
             android:textColor="@color/pro_black"
-            android:layout_marginEnd="@dimen/_2sdp"
             android:textSize="@dimen/_10sdp"
-            app:layout_constraintEnd_toStartOf="@+id/tvDeliveryCharge"
+            app:layout_constraintEnd_toStartOf="@+id/tvRupees"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
         <TextView
@@ -127,7 +128,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_6sdp"
             android:layout_marginEnd="@dimen/_10sdp"
-           android:fontFamily="@font/sofiaprosemibold"
+            android:fontFamily="@font/sofiaprosemibold"
             android:text="130"
             android:textColor="@color/pro_black"
             android:textSize="@dimen/_12sdp"
@@ -138,12 +139,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_6sdp"
-           android:fontFamily="@font/sofiaprosemibold"
+            android:layout_marginEnd="@dimen/_6sdp"
+            android:fontFamily="@font/sofiaprosemibold"
             android:text="Rs"
             android:textColor="@color/pro_black"
-            android:layout_marginEnd="@dimen/_6sdp"
             android:textSize="@dimen/_12sdp"
-            app:layout_constraintEnd_toStartOf="@+id/tvDeliveryCharge"
+            app:layout_constraintEnd_toStartOf="@+id/tvGrandTotal"
             app:layout_constraintTop_toBottomOf="@+id/tvDeliveryCharge" />
 
         <androidx.constraintlayout.widget.ConstraintLayout

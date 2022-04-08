@@ -2,10 +2,22 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+        <variable
+            name="StoreList"
+            type="com.netSet.urbanstores.models.ShowStoreList.Data" />
+
+    </data>
+
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white">
+
+
+
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/openProducts"
@@ -31,7 +43,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_145sdp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/img1"
+                    ProfileImage="@{StoreList.imageUrl}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -42,7 +54,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_8sdp"
                     android:fontFamily="@font/sofiaprosemibold"
-                    android:text="@string/shop_name"
+                    android:text="@{StoreList.storeName}"
                     android:textColor="@color/regular_font_color"
                     android:textSize="@dimen/_14sdp"
                     android:layout_marginTop="@dimen/_3sdp"
@@ -54,7 +66,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_8sdp"
                     android:fontFamily="@font/sofiapromedium"
-                    android:text="@string/open_hours"
+                    android:text="@{StoreList.storeOpenTime + ` to ` + StoreList.storeCloseTime}"
                     android:textSize="@dimen/_9sdp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/shopName" />
@@ -84,5 +96,7 @@
 
         </com.google.android.material.card.MaterialCardView>
 
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

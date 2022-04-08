@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "31382294199",
+    "project_id": "my-us-project-9f37b",
+    "storage_bucket": "my-us-project-9f37b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:31382294199:android:f44485124be25b9d138732",
+        "android_client_info": {
+          "package_name": "com.netSet.urbanstores"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "31382294199-mmnagiur0m9aesopnnnebtt3srlibh4c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.netSet.urbanstores",
+            "certificate_hash": "6f8f1385357c0f9b336aeff2d23f7e87cff80d71"
+          }
+        },
+        {
+          "client_id": "31382294199-fnpitutvi0p8ku7c3ivh3sprd06fkhd9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB03q7rsjDjRv70xaMPOukLjoYY6xo1W1E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "31382294199-fnpitutvi0p8ku7c3ivh3sprd06fkhd9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

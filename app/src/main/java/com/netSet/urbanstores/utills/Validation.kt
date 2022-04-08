@@ -29,6 +29,14 @@ object Validation {
         return Patterns.PHONE.matcher(text).matches()
     }
 
+    fun View.notVisible(){
+        this.visibility = View.GONE
+    }
+
+    fun View.visible(){
+        this.visibility = View.VISIBLE
+    }
+
 
     //cant
     fun getEmojiFilter(blockChars: String, context: Context): Array<InputFilter> {

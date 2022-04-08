@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/openProducts"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_90sdp"
+            android:layout_marginHorizontal="@dimen/card_view_margin"
+            android:layout_marginVertical="@dimen/_10sdp"
+            app:cardCornerRadius="@dimen/card_corner_radius"
+            app:cardElevation="@dimen/card_elevation"
+            app:cardMaxElevation="@dimen/card_max_elevation"
+            app:cardPreventCornerOverlap="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#51000000">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/productImg"
+                    android:layout_width="@dimen/_65sdp"
+                    android:layout_height="@dimen/_65sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:background="@color/shimer_items_color"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/productName"
+                    style="@style/regularHeadingTxts"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text=""
+                    app:layout_constraintStart_toEndOf="@+id/productImg"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/productAmount"
+                    style="@style/regularHeadingTxts"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/shimer_items_color"
+                    android:text="90 Rs"
+                    android:textColor="@color/shimer_items_color"
+                    android:textSize="@dimen/_13sdp"
+                    app:layout_constraintStart_toEndOf="@+id/productImg"
+                    app:layout_constraintTop_toBottomOf="@+id/productName" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/mrpTxt"
+                    style="@style/regularHeadingTxts"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:background="@color/shimer_items_color"
+                    android:text="@string/mrp_txt"
+                    android:textColor="@color/shimer_items_color"
+                    android:textSize="@dimen/_10sdp"
+                    app:layout_constraintStart_toEndOf="@+id/productAmount"
+                    app:layout_constraintTop_toBottomOf="@+id/productName" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/productDiscount"
+                    style="@style/regularHeadingTxts"
+                    android:layout_width="4dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="@dimen/_2sdp"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:text=""
+                    android:textColor="@color/mrp_discount_txt_color"
+                    android:textSize="@dimen/_10sdp"
+                    app:layout_constraintStart_toEndOf="@+id/mrpTxt"
+                    app:layout_constraintTop_toBottomOf="@+id/productName" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0.8dp"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:background="#808080"
+                    app:layout_constraintBottom_toBottomOf="@+id/productDiscount"
+                    app:layout_constraintEnd_toEndOf="@+id/productDiscount"
+                    app:layout_constraintStart_toStartOf="@+id/productDiscount"
+                    app:layout_constraintTop_toTopOf="@+id/productDiscount" />
+
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/quantitys"
+                    android:layout_width="@dimen/_57sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginBottom="@dimen/_13sdp"
+                    android:background="@color/shimer_items_color"
+                    android:padding="@dimen/_2sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/productImg" />
+
+                <TextView
+                    android:id="@+id/itemAddButton"
+                    android:layout_width="@dimen/_47sdp"
+                    android:layout_height="@dimen/_29sdp"
+                    android:layout_margin="@dimen/_10sdp"
+
+                    android:background="@color/shimer_items_color"
+                    android:textSize="@dimen/_9sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>

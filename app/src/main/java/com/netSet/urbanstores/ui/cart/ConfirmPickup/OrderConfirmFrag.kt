@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.netSet.urbanstores.R
-import com.netSet.urbanstores.activities.MainActivity
 import com.netSet.urbanstores.base.BaseFragment
 import com.netSet.urbanstores.databinding.FragmentOrderConfirmBinding
 import com.netSet.urbanstores.ui.payment.PaymentFragment
@@ -17,6 +16,7 @@ class OrderConfirmFrag : BaseFragment() {
 
     var binding : FragmentOrderConfirmBinding ?=null
     var adapter : PopularItemsAdapter ?= null
+    var ttlAmnt:Int=0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         if (rootView==null){
@@ -31,10 +31,10 @@ class OrderConfirmFrag : BaseFragment() {
         adapterCall()
 //        navigationBgVisiblity()
         hideBottomNavigation()
-//        getTotalAmntUsingBundle()
-//        grandTotalAmnt()
+        getTotalAmntUsingBundle()
+       grandTotalAmnt()
         initUI()
-        setToolBar(R.mipmap.back_48x48,"CONFIRM",0)
+        setToolBar("back","CONFIRM",0)
     }
 
 
@@ -44,11 +44,14 @@ class OrderConfirmFrag : BaseFragment() {
             locationBottomSheet.show(requireActivity().supportFragmentManager,"Location bottom Sheet")
         }
         binding?.confirmOrderBtn?.setOnClickListener {
-            (activity as MainActivity).replaceFragment(PaymentFragment(), true, false,)
+            val bundle = Bundle()
+            val fragment = PaymentFragment()
+            bundle.putInt("totalAmount", ttlAmnt)
+            fragment.arguments = bundle
+            getBaseActivity().replaceFragment(fragment, true, false)
         }
     }
 
-/*
     private fun grandTotalAmnt() {
         if (binding?.itemtotalAmnt?.text.toString().toInt()>0){
             binding?.deliveryChargeAmnt?.text = 20.toString()
@@ -58,12 +61,11 @@ class OrderConfirmFrag : BaseFragment() {
         val deliveryAmnt = binding?.deliveryChargeAmnt?.text.toString().toInt()
         binding?.grandTotalAmnt?.text = (totalAmnt+deliveryAmnt).toString()
     }
-*/
 
-/*    private fun getTotalAmntUsingBundle() {
-        val ttlAmnt = arguments?.getInt("totalAmount")
+    private fun getTotalAmntUsingBundle() {
+         ttlAmnt = arguments?.getInt("totalAmount")!!
         binding?.itemtotalAmnt?.text = ttlAmnt.toString()
-    }*/
+    }
 
     override fun onDestroy() {
         super.onDestroy()
